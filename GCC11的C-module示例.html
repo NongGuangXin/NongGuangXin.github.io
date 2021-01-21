@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="AT&amp;T汇编调用系统调用的三种方式, 技术分享，学习记录。">
+    <meta name="keywords" content="GCC11的C++-module示例, 技术分享，学习记录。">
     <meta name="description" content="这里是农光鑫的个人博客">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>AT&amp;T汇编调用系统调用的三种方式 | 农光鑫的博客</title>
+    <title>GCC11的C++-module示例 | 农光鑫的博客</title>
     <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/nongguangxin/nongguangxin.github.io/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/nongguangxin/nongguangxin.github.io/libs/awesome/css/all.css">
@@ -266,12 +266,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://cdn.jsdelivr.net/gh/nongguangxin/nongguangxin.github.io/medias/featureimages/8.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://cdn.jsdelivr.net/gh/nongguangxin/nongguangxin.github.io/medias/featureimages/20.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">AT&amp;T汇编调用系统调用的三种方式</h1>
+                    <h1 class="description center-align post-title">GCC11的C++-module示例</h1>
                 </div>
             </div>
         </div>
@@ -387,20 +387,20 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/Linux/">
-                                <span class="chip bg-color">Linux</span>
+                            <a href="/tags/GCC/">
+                                <span class="chip bg-color">GCC</span>
                             </a>
                         
-                            <a href="/tags/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80/">
-                                <span class="chip bg-color">汇编语言</span>
+                            <a href="/tags/GCC11/">
+                                <span class="chip bg-color">GCC11</span>
                             </a>
                         
-                            <a href="/tags/int%E4%B8%AD%E6%96%AD/">
-                                <span class="chip bg-color">int中断</span>
+                            <a href="/tags/module/">
+                                <span class="chip bg-color">module</span>
                             </a>
                         
-                            <a href="/tags/syscall/">
-                                <span class="chip bg-color">syscall</span>
+                            <a href="/tags/C/">
+                                <span class="chip bg-color">C++</span>
                             </a>
                         
                     </div>
@@ -411,8 +411,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/AT-T%E6%B1%87%E7%BC%96/" class="post-category">
-                                AT&T汇编
+                            <a href="/categories/C-C/" class="post-category">
+                                C/C++
                             </a>
                         
                     </div>
@@ -424,28 +424,28 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-09-26
+                    2021-01-21
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2021-01-16
+                    2021-01-21
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1k
+                    826
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    4 分
+                    3 分
                 </div>
                 
 
@@ -473,146 +473,63 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="0-系统环境"><a href="#0-系统环境" class="headerlink" title="0.  系统环境"></a>0.  系统环境</h2><p>内核和系统版本</p>
-<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">$ uname -srvpo
-Linux 5.4.0-48-generic #52-Ubuntu SMP Thu Sep 10 10:58:49 UTC 2020 x86_64 GNU&#x2F;Linux<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<p>GCC版本</p>
-<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">$ gcc -v
-gcc version 9.3.0 (Ubuntu 9.3.0-10ubuntu2)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<p>汇编器版本</p>
-<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">$ as --version
-GNU assembler (GNU Binutils for Ubuntu) 2.34<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<p>32位系统系统调用表：<br>/usr/include/x86_64-linux-gnu/asm/unistd_32.h</p>
-<p>64位系统系统调用表：<br>/usr/include/x86_64-linux-gnu/asm/unistd_64.h</p>
-<p>这里以一个简单的helloworld程序来说明</p>
-<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span><span class="token string">&lt;stdio.h></span></span>
+                <h2 id="0-前言"><a href="#0-前言" class="headerlink" title="0. 前言"></a>0. 前言</h2><p>一直想尝试一下C++20新的特性–module，但是最新的GCC稳定版10.2好像还没有支持，查看官网得知，GCC11的dev/module分支会对此有较好的支持。那只能从源码编译GCC11了。此文就此做个记录。</p>
+<p>编译环境：Ubuntu 2004，GCC10.2，x86_64.</p>
+<h2 id="1-安装依赖"><a href="#1-安装依赖" class="headerlink" title="1. 安装依赖"></a>1. 安装依赖</h2><p>先安装一些编译GCC11需要使用的依赖，可能不全。</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">sudo</span> <span class="token function">apt</span> <span class="token function">install</span> <span class="token function">curl</span> <span class="token function">bzip2</span> build-essential flex bison zlib1g-dev<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h2 id="2-下载源码"><a href="#2-下载源码" class="headerlink" title="2. 下载源码"></a>2. 下载源码</h2><p>下载源码，我选择从国内的gitee镜像源下载，可以大幅加快下载速度。gitee源每天与官方源同步一次，基本可以保证和官方保持同步。</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">git</span> clone --depth<span class="token operator">=</span><span class="token number">1</span> https://gitee.com/mirrors/gcc.git -b devel/c++-modules<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h2 id="3-进入源码目录，下载依赖。"><a href="#3-进入源码目录，下载依赖。" class="headerlink" title="3. 进入源码目录，下载依赖。"></a>3. 进入源码目录，下载依赖。</h2><p>下载完成后，进入源码目录，执行<code>download_prerequisites</code>自动下载解压GCC需要的依赖。创建一个<code>bulid</code>目录用来安装GCC。</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token builtin class-name">cd</span> gcc/
+$ ./contrib/download_prerequisites
+$ <span class="token function">mkdir</span> build<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<h2 id="4-配置"><a href="#4-配置" class="headerlink" title="4. 配置"></a>4. 配置</h2><p>进行编译前的环境配置，我选择安装在刚才创建的build目录中，如果不设置的话，将会默认安装到系统目录。然后因为只用来写C和C++，所以只使能C和C++。</p>
+<p>如果配置的过程中出现错误，可以根据错误提示安装相应的依赖或执行相应的动作。</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ ./configure --prefix<span class="token operator">=</span>/home/ngx/workspace/gcc/build --enable-threads<span class="token operator">=</span>posix --enable--long-long --with-system-zlib --enable-languages<span class="token operator">=</span>c,c++<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h2 id="5-编译"><a href="#5-编译" class="headerlink" title="5. 编译"></a>5. 编译</h2><p>配置完成后，就可以直接执行<code>make</code>进行编译。在这里可以根据需要使用多线程编译，在我的笔记本电脑上，<code>I7 6700HQ</code>开启16个线程编译，大概需要25分钟。</p>
+<p>如果编译的过程出错，大概率还是依赖问题，直接安装相关的依赖就可以了。需要注意的是，有时可能需要重新执行上一步的配置才能应用下载的依赖。</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">make</span> -j16<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h2 id="6-安装"><a href="#6-安装" class="headerlink" title="6. 安装"></a>6. 安装</h2><p>编译完成后执行<code>make install</code>安装在指定的目录。</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">sudo</span> <span class="token function">make</span> <span class="token function">install</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h2 id="7-安装完成"><a href="#7-安装完成" class="headerlink" title="7. 安装完成"></a>7. 安装完成</h2><p>执行进入安装目录下的GCC，可以看见输出信息如下所示：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">gcc/build/bin$ ./gcc -v
+Using built-in specs.
+<span class="token assign-left variable">COLLECT_GCC</span><span class="token operator">=</span>./gcc
+<span class="token assign-left variable">COLLECT_LTO_WRAPPER</span><span class="token operator">=</span>/home/ngx/workspace/gcc/build/libexec/gcc/x86_64-pc-linux-gnu/11.0.0/lto-wrapper
+Target: x86_64-pc-linux-gnu
+Configured with: ./configure --prefix<span class="token operator">=</span>/home/ngx/workspace/gcc/build --enable-threads<span class="token operator">=</span>posix --enable--long-long --with-system-zlib --enable-languages<span class="token operator">=</span>c,c++ --disable-multilib
+Thread model: posix
+Supported LTO compression algorithms: zlib
+gcc version <span class="token number">11.0</span>.0 <span class="token number">20210104</span> <span class="token punctuation">(</span>experimental<span class="token punctuation">)</span> <span class="token punctuation">[</span>c++-modules revision <span class="token number">20210117</span>-1750<span class="token punctuation">]</span> <span class="token punctuation">(</span>GCC<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>但是因为我们没有安装到系统目录，想要方便使用，还需要将相关的目录添加到环境变量；包括二进制文件和GCC11的库文件。</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token builtin class-name">echo</span> <span class="token string">'PATH=/home/ngx/workspace/gcc/build/bin:<span class="token environment constant">$PATH</span>'</span> <span class="token operator">>></span> ~/.bashrc
+$ <span class="token builtin class-name">source</span> ~/.bashrc
+$ <span class="token function">sudo</span> <span class="token builtin class-name">echo</span> <span class="token string">'/home/ngx/workspace/gcc/build/lib64'</span> <span class="token operator">>></span> /etc/ld.so.conf
+$ ldconfig<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>将新版本的GCC程序链接到<code>/usr/bin</code>下代替原来的。</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">sudo</span> <span class="token function">ln</span> -s ~/workspace/gcc/build/bin/gcc /usr/bin/gcc
+$ <span class="token function">sudo</span> <span class="token function">ln</span> -s ~/workspace/gcc/build/bin/g++ /usr/bin/g++<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<h2 id="8-例子"><a href="#8-例子" class="headerlink" title="8. 例子"></a>8. 例子</h2><p>以下是一个很简单的例子。</p>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">&#x2F;&#x2F; hello.cc
+module;
+#include &lt;iostream&gt;
+export module helloworld;
 
-<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token punctuation">&#123;</span>
-	<span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"hello world"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-	<span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="1-int-中断"><a href="#1-int-中断" class="headerlink" title="1.  int 中断"></a>1.  int 中断</h2><pre class="line-numbers language-asm" data-language="asm"><code class="language-asm"># helloworld_int.s
-.data                           # 数据段声明
-
-# 系统调用号
-.equ SYS_WRITE, 4
-.equ SYS_EXIT,  1
-
-# 定义要输出的字符串
-msg : .string &quot;Hello World!\n&quot;  # 要输出的字符串
-len &#x3D; . - msg                   # 字符串长度
-
-.text                           # 代码段声明
-.global _start                  # 指定入口函数
-_start:
-    # write(1, msg, len)
-    mov     $SYS_WRITE, %rax    # 系统调用号（sys_write）
-    mov     $1, %rbx            # 参数一：文件描述符（stdout）
-    mov     $msg, %rcx          # 参数二：要显示的字符串
-    mov     $len, %rdx          # 参数三：字符串长度
-    int     $0x80
-
-    # exit(0)
-    mov     $SYS_EXIT, %rax     # 系统调用号（sys_exit）
-    mov     $0, %rbx            # 参数一：退出代码
-    int     $0x80               # 调用内核功能<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>汇编执行：</p>
-<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">$ as helloworld_int.s -o helloworld.o
-$ ld helloworld.o -o helloworld
-$ .&#x2F;helloworld 
-Hello World!<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-<p>在上面的汇编代码中，%rax存放系统的调用号，%rbx，%rcx，%rdx分别存放第一，第二，第三个参数。</p>
-<p>使用这种方式调用系统调用的时候要注意，系统调用表的编号对应的是32位的系统系统对应表.</p>
-<h2 id="2-syscall"><a href="#2-syscall" class="headerlink" title="2.  syscall"></a>2.  syscall</h2><pre class="line-numbers language-asm" data-language="asm"><code class="language-asm"># helloworld_syscall.s
-.data                           # 数据段声明
-
-# 系统调用号
-.equ SYS_WRITE, 1
-.equ SYS_EXIT,  60
-
-# 定义要输出的字符串
-msg : .string &quot;Hello World!\n&quot;  # 要输出的字符串
-len &#x3D; . - msg                   # 字符串长度
-
-.text                           # 代码段声明
-.global _start                  # 指定入口函数
-_start:
-    # write(1, msg, len)    
-    mov     $len, %rdx          # 参数三：字符串长度
-    mov     $msg, %rsi          # 参数二：要显示的字符串
-    mov     $1, %rdi            # 参数一：文件描述符（stdout）
-    mov     $SYS_WRITE, %rax    # 系统调用号（sys_write）
-    syscall                     # 调用内核功能
-
-    # exit(0)
-    mov     $0, %rdi            # 参数一：退出代码
-    mov     $SYS_EXIT, %rax     # 系统调用号（sys_exit）
-    syscall                     # 调用内核功能<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>汇编执行：</p>
-<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">$ as helloworld_syscall.s -o helloworld_syscall.o
-$ ld helloworld_syscall.o -o helloworld_syscall
-$ .&#x2F;helloworld_syscall 
-Hello World!<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-<p>需要注意的是syscall和int参数的存放位置是不一样的。在上面的汇编代码中，%rax存放系统的调用号，%rdi，%rsi，%rdx分别存放第一，第二，第三个参数。</p>
-<p>使用这种方式的时候使用的是64位系统对应的系统调用表.</p>
-<h2 id="3-CALL-libc库"><a href="#3-CALL-libc库" class="headerlink" title="3.  CALL libc库"></a>3.  CALL libc库</h2><p>前面的方法只能输出固定的字符串，如果想输出格式化字符串，我们可以链接C库从而调用大量的C库函数。</p>
-<pre class="line-numbers language-asm" data-language="asm"><code class="language-asm"># helloworld_lib.s
-.section .data
-
-number:
-    .ascii &quot;number:%d\n\0&quot;
-
-.section .text
-.globl  _start
-_start:
-    mov     $number, %rdi
-    mov		$99, %rsi
-    call    printf
-
-    mov     $0, %rdi
-    call    exit
-
-
-
-# -lc : 使用库c
-# -I  : 加载链接库，并链接到程序<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>使用以下命令汇编和链接到C库：</p>
-<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">$ as helloworld_lib.s -o helloworld_lib.o
-$ ld -I &#x2F;lib64&#x2F;ld-linux-x86-64.so.2 -o helloworld_lib helloworld_lib.o -lc<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<p>以上的命令中 ：<code>-I /lib64/ld-linux-x86-64.so.2</code> 表示使用<code>ld-linux-x86-64.so.2</code>作为动态链接器，<code>-lc</code>表示链接到C库</p>
-<p>执行：</p>
-<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">$ .&#x2F;helloworld_lib 
-number:99<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
-
-<h2 id="4-GCC"><a href="#4-GCC" class="headerlink" title="4.  GCC"></a>4.  GCC</h2><p>使用GCC编译汇编代码可以自动链接C库。</p>
-<p>使用GCC编译和上面的方法没有太大的区别。<br>但是有两点需要注意：</p>
-<ul>
-<li>用GCC汇编时需要指定入口函数为main，否则会报错。</li>
-<li>用GCC编译时，GCC会在main函数执行前调用libc库进行一些初始化操作，会修改一些程序的初始栈帧，比如程序的启动参数等，可能会导致无法正确获取程序的启动参数。</li>
-</ul>
-<pre class="line-numbers language-asm" data-language="asm"><code class="language-asm"># helloworld_syscall_gcc.s
-.section .data
-.section .text
-msg:
-    .string &quot;hello world\n&quot;
-
-.globl main
-main:
-    # printf(&quot;hello world\n&quot;)
-    mov     $0, %rax        # 必须将eax置零才能成功 call printf
-    mov     $msg, %rdi
-    call    printf
-
-    # exit(0)
-     mov     $0, %rdi    
-     call    exit<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>汇编运行</p>
-<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">$ gcc -no-pie helloworld_syscall_gcc.s 
-$ .&#x2F;a.out 
-hello world<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>三种方式各有特点，个人推荐第二种，需要输出格式化数据的时候可以使用第三种。</p>
+export void hello() &#123;
+    std::cout &lt;&lt; &quot;Hello world!\n&quot;;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">&#x2F;&#x2F; main.cc
+import helloworld;
+ 
+int main() &#123;
+    hello();
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>编译的时候需要添加<code>-fmodules-ts</code>编译选项。</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ g++ hello.cc main.cc -fmodules-ts
+$ ./a.out 
+Hello world<span class="token operator">!</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<h2 id="9-参考链接"><a href="#9-参考链接" class="headerlink" title="9. 参考链接"></a>9. 参考链接</h2><p><a target="_blank" rel="noopener" href="https://gcc.gnu.org/wiki/cxx-modules">https://gcc.gnu.org/wiki/cxx-modules</a></p>
+<p><a target="_blank" rel="noopener" href="https://gcc.gnu.org/projects/cxx-status.html#cxx20">https://gcc.gnu.org/projects/cxx-status.html#cxx20</a></p>
 
                 
             </div>
@@ -639,7 +556,7 @@ hello world<span aria-hidden="true" class="line-numbers-rows"><span></span><span
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://nonguangxin.cn/AT-T%E6%B1%87%E7%BC%96%E8%B0%83%E7%94%A8%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E7%9A%84%E4%B8%89%E7%A7%8D%E6%96%B9%E5%BC%8F.html">https://nonguangxin.cn/AT-T%E6%B1%87%E7%BC%96%E8%B0%83%E7%94%A8%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E7%9A%84%E4%B8%89%E7%A7%8D%E6%96%B9%E5%BC%8F.html</a>
+                    <a href="https://nonguangxin.cn/GCC11%E7%9A%84C-module%E7%A4%BA%E4%BE%8B.html">https://nonguangxin.cn/GCC11%E7%9A%84C-module%E7%A4%BA%E4%BE%8B.html</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -677,20 +594,20 @@ hello world<span aria-hidden="true" class="line-numbers-rows"><span></span><span
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/Linux/">
-                                    <span class="chip bg-color">Linux</span>
+                                <a href="/tags/GCC/">
+                                    <span class="chip bg-color">GCC</span>
                                 </a>
                             
-                                <a href="/tags/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80/">
-                                    <span class="chip bg-color">汇编语言</span>
+                                <a href="/tags/GCC11/">
+                                    <span class="chip bg-color">GCC11</span>
                                 </a>
                             
-                                <a href="/tags/int%E4%B8%AD%E6%96%AD/">
-                                    <span class="chip bg-color">int中断</span>
+                                <a href="/tags/module/">
+                                    <span class="chip bg-color">module</span>
                                 </a>
                             
-                                <a href="/tags/syscall/">
-                                    <span class="chip bg-color">syscall</span>
+                                <a href="/tags/C/">
+                                    <span class="chip bg-color">C++</span>
                                 </a>
                             
                         </div>
@@ -736,50 +653,60 @@ hello world<span aria-hidden="true" class="line-numbers-rows"><span></span><span
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/%E7%94%A8GDB%E8%B0%83%E8%AF%95%E6%B1%87%E7%BC%96%E4%BB%A3%E7%A0%81.html">
+                <a href="/GCC11%E7%9A%84C-module%E7%A4%BA%E4%BE%8B.html">
                     <div class="card-image">
                         
                         
-                        <img src="https://cdn.jsdelivr.net/gh/nongguangxin/nongguangxin.github.io/medias/featureimages/4.jpg" class="responsive-img" alt="用GDB调试汇编代码">
+                        <img src="https://cdn.jsdelivr.net/gh/nongguangxin/nongguangxin.github.io/medias/featureimages/20.jpg" class="responsive-img" alt="GCC11的C++-module示例">
                         
-                        <span class="card-title">用GDB调试汇编代码</span>
+                        <span class="card-title">GCC11的C++-module示例</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            简要记录如何用GDB调试汇编代码
+                            记录从源码编译GCC11的过程和一个简单的C++-module示例
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-09-26
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-01-21
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/AT-T%E6%B1%87%E7%BC%96/" class="post-category">
-                                    AT&T汇编
+                            <a href="/categories/C-C/" class="post-category">
+                                    C/C++
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/GDB/">
-                        <span class="chip bg-color">GDB</span>
+                    <a href="/tags/GCC/">
+                        <span class="chip bg-color">GCC</span>
                     </a>
                     
-                    <a href="/tags/AT-T%E6%B1%87%E7%BC%96/">
-                        <span class="chip bg-color">AT&amp;T汇编</span>
+                    <a href="/tags/GCC11/">
+                        <span class="chip bg-color">GCC11</span>
+                    </a>
+                    
+                    <a href="/tags/module/">
+                        <span class="chip bg-color">module</span>
+                    </a>
+                    
+                    <a href="/tags/C/">
+                        <span class="chip bg-color">C++</span>
                     </a>
                     
                 </div>
@@ -793,31 +720,31 @@ hello world<span aria-hidden="true" class="line-numbers-rows"><span></span><span
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/Markdown--mermaid%E7%A4%BA%E4%BE%8B.html">
+                <a href="/C%E8%AF%AD%E8%A8%80%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%A4%BA%E4%BE%8B.html">
                     <div class="card-image">
                         
                         
-                        <img src="https://cdn.jsdelivr.net/gh/nongguangxin/nongguangxin.github.io/medias/featureimages/18.jpg" class="responsive-img" alt="Markdown流程图示例">
+                        <img src="https://cdn.jsdelivr.net/gh/nongguangxin/nongguangxin.github.io/medias/featureimages/15.jpg" class="responsive-img" alt="c语言多线程示例">
                         
-                        <span class="card-title">Markdown流程图示例</span>
+                        <span class="card-title">c语言多线程示例</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            基于mermaid的简单的Markdown图表示例。
+                            一个简单的C语言多进程示例
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-09-18
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-01-08
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/Markdown/" class="post-category">
-                                    Markdown
+                            <a href="/categories/C-C/" class="post-category">
+                                    C/C++
                                 </a>
                             
                             
@@ -827,12 +754,12 @@ hello world<span aria-hidden="true" class="line-numbers-rows"><span></span><span
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/mermaid/">
-                        <span class="chip bg-color">mermaid</span>
+                    <a href="/tags/pthread/">
+                        <span class="chip bg-color">pthread</span>
                     </a>
                     
-                    <a href="/tags/%E5%9B%BE%E8%A1%A8/">
-                        <span class="chip bg-color">图表</span>
+                    <a href="/tags/Multithreading/">
+                        <span class="chip bg-color">Multithreading</span>
                     </a>
                     
                 </div>
