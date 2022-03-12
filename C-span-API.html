@@ -1,0 +1,1232 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="C++ span API, 技术分享，学习记录。">
+    <meta name="description" content="这里是农光鑫的个人博客">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>C++ span API | 农光鑫的博客</title>
+    <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/NongGuangXin/NongGuangXin.github.io/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/NongGuangXin/NongGuangXin.github.io/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/NongGuangXin/NongGuangXin.github.io/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/NongGuangXin/NongGuangXin.github.io/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/NongGuangXin/NongGuangXin.github.io/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/NongGuangXin/NongGuangXin.github.io/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/NongGuangXin/NongGuangXin.github.io/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/NongGuangXin/NongGuangXin.github.io/css/my.css">
+
+    <script src="https://cdn.jsdelivr.net/gh/NongGuangXin/NongGuangXin.github.io/libs/jquery/jquery.min.js"></script>
+
+<meta name="generator" content="Hexo 5.4.1"></head>
+
+
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="https://cdn.jsdelivr.net/gh/NongGuangXin/NongGuangXin.github.io/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">农光鑫的博客</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="https://cdn.jsdelivr.net/gh/NongGuangXin/NongGuangXin.github.io/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">农光鑫的博客</div>
+        <div class="logo-desc">
+            
+            这里是农光鑫的个人博客
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://gitee.com/nongguangxin" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://gitee.com/nongguangxin" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://cdn.jsdelivr.net/gh/NongGuangXin/NongGuangXin.github.io/medias/featureimages/9.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">C++ span API</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/NongGuangXin/NongGuangXin.github.io/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        padding: 35px 0 15px 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        padding-bottom: 30px;
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/STL/">
+                                <span class="chip bg-color">STL</span>
+                            </a>
+                        
+                            <a href="/tags/%E8%BF%9E%E7%BB%AD%E5%AE%B9%E5%99%A8%E8%A7%86%E5%9B%BE/">
+                                <span class="chip bg-color">连续容器视图</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/C-C/" class="post-category">
+                                C/C++
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2021-05-17
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2022-03-01
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    1.3k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    6 分
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/NongGuangXin/NongGuangXin.github.io/libs/prism/prism.css">
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="C-span"><a href="#C-span" class="headerlink" title="C++ span"></a>C++ span</h1><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">template</span><span class="token operator">&lt;</span>
+    <span class="token keyword">class</span> <span class="token class-name">T</span><span class="token punctuation">,</span> <span class="token comment">// 元素类型；必须是完整对象类型且非抽象类</span>
+    std<span class="token double-colon punctuation">::</span>size_t Extent <span class="token operator">=</span> std<span class="token double-colon punctuation">::</span>dynamic_extent <span class="token comment">// 序列中的元素数，或若它为动态则为 std::dynamic_extent</span>
+<span class="token operator">></span> <span class="token keyword">class</span> <span class="token class-name">span</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>类模板 <code>span</code> 所描述的对象能指代对象的相接序列，序列的首元素在零位置。 <code>span</code> 能拥有静态长度，该情况下序列中的元素数已知并编码于类型中，或拥有动态长度。可以用于防止数组传参时类型退化。</p>
+<h2 id="成员类型"><a href="#成员类型" class="headerlink" title="成员类型"></a>成员类型</h2><table>
+<thead>
+<tr>
+<th>成员类型</th>
+<th>定义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>element_type</code></td>
+<td><code>T</code></td>
+</tr>
+<tr>
+<td><code>value_type</code></td>
+<td><code>std::remove_cv_t&lt;T&gt;</code></td>
+</tr>
+<tr>
+<td><code>size_type</code></td>
+<td><code>std::size_t</code></td>
+</tr>
+<tr>
+<td><code>difference_type</code></td>
+<td><code>std::ptrdiff_t</code></td>
+</tr>
+<tr>
+<td><code>reference</code></td>
+<td><code>T&amp;</code></td>
+</tr>
+<tr>
+<td><code>const_reference</code></td>
+<td><code>const T&amp;</code></td>
+</tr>
+<tr>
+<td><code>pointer</code></td>
+<td><code>T*</code></td>
+</tr>
+<tr>
+<td><code>const_pointer</code></td>
+<td><code>const T*</code></td>
+</tr>
+<tr>
+<td><code>iterator</code></td>
+<td>实现定义的遗留随机访问迭代器 、常量表达式迭代器兼遗留连续迭代器  ，其 <code>value_type</code> 为 <code>value_type</code></td>
+</tr>
+<tr>
+<td><code>reverse_iterator</code></td>
+<td><code>std::reverse_iterator&lt;iterator&gt;</code></td>
+</tr>
+<tr>
+<td><code>const_reverse_iterator</code></td>
+<td><code>std::reverse_iterator&lt;const_iterator&gt;</code></td>
+</tr>
+</tbody></table>
+<h2 id="成员常量"><a href="#成员常量" class="headerlink" title="成员常量"></a>成员常量</h2><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">static</span> <span class="token keyword">constexpr</span> std<span class="token double-colon punctuation">::</span>size_t extent <span class="token operator">=</span> Extent<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h2 id="构造"><a href="#构造" class="headerlink" title="构造"></a>构造</h2><h4 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h4><ol>
+<li><p>创建一个空容器.  构造空 <code>span</code> 使其 <code>data() == nullptr</code> 而 <code>size() == 0</code> 。</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">constexpr</span> <span class="token function">span</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">noexcept</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<li><p>构造作为范围 <code>[first, first + count)</code> 上的视图的 <code>span</code> ；产生的 <code>span</code> 有 <code>data() == std::to_address(first)</code> 与 <code>size() == count</code> 。</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">template</span><span class="token operator">&lt;</span> <span class="token keyword">class</span> <span class="token class-name">It</span> <span class="token operator">></span>
+<span class="token keyword">explicit</span><span class="token punctuation">(</span>extent <span class="token operator">!=</span> std<span class="token double-colon punctuation">::</span>dynamic_extent<span class="token punctuation">)</span> <span class="token keyword">constexpr</span> <span class="token function">span</span><span class="token punctuation">(</span> It first<span class="token punctuation">,</span> size_type count <span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></li>
+<li><p>构造作为范围 <code>[first, last)</code> 上的视图的 <code>span</code> ；产生的 <code>span</code> 有 <code>data() == std::to_address(first)</code> 与 <code>size() == last-first</code> 。</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">template</span><span class="token operator">&lt;</span> <span class="token keyword">class</span> <span class="token class-name">It</span><span class="token punctuation">,</span> <span class="token keyword">class</span> <span class="token class-name">End</span> <span class="token operator">></span>
+<span class="token keyword">explicit</span><span class="token punctuation">(</span>extent <span class="token operator">!=</span> std<span class="token double-colon punctuation">::</span>dynamic_extent<span class="token punctuation">)</span> <span class="token keyword">constexpr</span> <span class="token function">span</span><span class="token punctuation">(</span> It first<span class="token punctuation">,</span> End last <span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></li>
+<li><p>构造作为数组 <code>arr</code> 上的视图的 <code>span</code> ；产生的 <code>span</code> 有 <code>size() == N</code> 与 <code>data() == std::data(arr)</code> 。</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">template</span><span class="token operator">&lt;</span> std<span class="token double-colon punctuation">::</span>size_t N <span class="token operator">></span>
+<span class="token keyword">constexpr</span> <span class="token function">span</span><span class="token punctuation">(</span> <span class="token function">element_type</span> <span class="token punctuation">(</span><span class="token operator">&amp;</span>arr<span class="token punctuation">)</span><span class="token punctuation">[</span>N<span class="token punctuation">]</span> <span class="token punctuation">)</span> <span class="token keyword">noexcept</span><span class="token punctuation">;</span>
+
+<span class="token keyword">template</span><span class="token operator">&lt;</span> <span class="token keyword">class</span> <span class="token class-name">U</span><span class="token punctuation">,</span> std<span class="token double-colon punctuation">::</span>size_t N <span class="token operator">></span>
+<span class="token keyword">constexpr</span> <span class="token function">span</span><span class="token punctuation">(</span> std<span class="token double-colon punctuation">::</span>array<span class="token operator">&lt;</span>U<span class="token punctuation">,</span> N<span class="token operator">></span><span class="token operator">&amp;</span> arr <span class="token punctuation">)</span> <span class="token keyword">noexcept</span><span class="token punctuation">;</span>
+
+<span class="token keyword">template</span><span class="token operator">&lt;</span> <span class="token keyword">class</span> <span class="token class-name">U</span><span class="token punctuation">,</span> std<span class="token double-colon punctuation">::</span>size_t N <span class="token operator">></span>
+<span class="token keyword">constexpr</span> <span class="token function">span</span><span class="token punctuation">(</span> <span class="token keyword">const</span> std<span class="token double-colon punctuation">::</span>array<span class="token operator">&lt;</span>U<span class="token punctuation">,</span> N<span class="token operator">></span><span class="token operator">&amp;</span> arr <span class="token punctuation">)</span> <span class="token keyword">noexcept</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+<li><p>构造作为范围 <code>range</code> 上的视图的 <code>span</code> ；产生的 <code>span</code> 有 <code>size() == std::ranges::size(r)</code> 与 <code>data() == std::ranges::data(range)</code>。</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">template</span><span class="token operator">&lt;</span> <span class="token keyword">class</span> <span class="token class-name">R</span> <span class="token operator">></span>
+<span class="token keyword">explicit</span><span class="token punctuation">(</span>extent <span class="token operator">!=</span> std<span class="token double-colon punctuation">::</span>dynamic_extent<span class="token punctuation">)</span> <span class="token keyword">constexpr</span> <span class="token function">span</span><span class="token punctuation">(</span> R<span class="token operator">&amp;&amp;</span> range <span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></li>
+<li><p>从另一 <code>span source</code> 的转换构造函数；产生的 <code>span</code> 有 <code>size() == source.size()</code> 与 <code>data() == source.data()</code>.</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">template</span><span class="token operator">&lt;</span> <span class="token keyword">class</span> <span class="token class-name">U</span><span class="token punctuation">,</span> std<span class="token double-colon punctuation">::</span>size_t N <span class="token operator">></span>
+<span class="token keyword">explicit</span><span class="token punctuation">(</span>extent <span class="token operator">!=</span> std<span class="token double-colon punctuation">::</span>dynamic_extent <span class="token operator">&amp;&amp;</span> N <span class="token operator">==</span> std<span class="token double-colon punctuation">::</span>dynamic_extent<span class="token punctuation">)</span>
+<span class="token keyword">constexpr</span> <span class="token function">span</span><span class="token punctuation">(</span> <span class="token keyword">const</span> std<span class="token double-colon punctuation">::</span>span<span class="token operator">&lt;</span>U<span class="token punctuation">,</span> N<span class="token operator">></span><span class="token operator">&amp;</span> s <span class="token punctuation">)</span> <span class="token keyword">noexcept</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></li>
+<li><p>默认化的赋值构造函数复制大小与数据指针；产生的 <code>span</code> 有 <code>size() == other.size()</code> 与 <code>data() == other.data()</code> 。</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">constexpr</span> <span class="token function">span</span><span class="token punctuation">(</span> <span class="token keyword">const</span> span<span class="token operator">&amp;</span> other <span class="token punctuation">)</span> <span class="token keyword">noexcept</span> <span class="token operator">=</span> <span class="token keyword">default</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+</ol>
+<h3 id="operator"><a href="#operator" class="headerlink" title="operator="></a>operator=</h3><p>赋值 <code>other</code> 给<code> *this</code> 。此默认化的赋值运算符进行数据指针和大小的浅复制，即调用此函数后， <code>data() == other.data()</code> 且 <code>size() == other.size()</code> 。</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">constexpr</span> span<span class="token operator">&amp;</span> <span class="token keyword">operator</span><span class="token operator">=</span><span class="token punctuation">(</span> <span class="token keyword">const</span> span<span class="token operator">&amp;</span> other <span class="token punctuation">)</span> <span class="token keyword">noexcept</span> <span class="token operator">=</span> <span class="token keyword">default</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h2 id="元素访问"><a href="#元素访问" class="headerlink" title="元素访问"></a>元素访问</h2><h3 id="operator-1"><a href="#operator-1" class="headerlink" title="operator[]"></a>operator[]</h3><p>返回位于指定位置 <code>pos</code> 的元素的引用。通过此运算符访问不存在的元素是未定义行为。</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">constexpr</span> reference <span class="token keyword">operator</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">(</span>size_type idx<span class="token punctuation">)</span> <span class="token keyword">const</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="front"><a href="#front" class="headerlink" title="front"></a>front</h3><p>返回到容器首元素的引用。在空容器上对 <code>front</code> 的调用是未定义的。</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">constexpr</span> reference <span class="token function">front</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">const</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="back"><a href="#back" class="headerlink" title="back"></a>back</h3><p>返回到容器中最后一个元素的引用。在空容器上调用 <code>back</code> 导致未定义行为。</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">constexpr</span> reference <span class="token function">back</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">const</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="data"><a href="#data" class="headerlink" title="data"></a>data</h3><p>返回指向作为元素存储工作的底层数组的指针。对于非空容器，返回的指针与首元素地址比较相等。</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">constexpr</span> pointer <span class="token function">data</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">const</span> <span class="token keyword">noexcept</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h2 id="迭代器"><a href="#迭代器" class="headerlink" title="迭代器"></a>迭代器</h2><h3 id="begin-end"><a href="#begin-end" class="headerlink" title="begin - end"></a>begin - end</h3><p>返回指向容器开头和结尾的迭代器。</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">constexpr</span> iterator <span class="token function">begin</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">const</span> <span class="token keyword">noexcept</span><span class="token punctuation">;</span><span class="token keyword">constexpr</span> iterator <span class="token function">end</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">const</span> <span class="token keyword">noexcept</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="rbegin-rend"><a href="#rbegin-rend" class="headerlink" title="rbegin - rend"></a>rbegin - rend</h3><p>返回指向容器开头和结尾的反向迭代器。</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">constexpr</span> reverse_iterator <span class="token function">rbegin</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">const</span> <span class="token keyword">noexcept</span><span class="token punctuation">;</span><span class="token keyword">constexpr</span> reverse_iterator <span class="token function">rend</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">const</span> <span class="token keyword">noexcept</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h2 id="观察器"><a href="#观察器" class="headerlink" title="观察器"></a>观察器</h2><h3 id="empty"><a href="#empty" class="headerlink" title="empty"></a>empty</h3><p>检查 span 是否为空。空则为true</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token punctuation">[</span><span class="token punctuation">[</span>nodiscard<span class="token punctuation">]</span><span class="token punctuation">]</span> <span class="token keyword">constexpr</span> <span class="token keyword">bool</span> <span class="token function">empty</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">const</span> <span class="token keyword">noexcept</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="size"><a href="#size" class="headerlink" title="size"></a>size</h3><p>返回 span 中的元素数。</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">constexpr</span> size_type <span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">const</span> <span class="token keyword">noexcept</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="size-bytes"><a href="#size-bytes" class="headerlink" title="size_bytes"></a>size_bytes</h3><p>返回以字节表示的序列大小.</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">constexpr</span> size_type <span class="token function">size_bytes</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">const</span> <span class="token keyword">noexcept</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h2 id="子视图"><a href="#子视图" class="headerlink" title="子视图"></a>子视图</h2><h3 id="first"><a href="#first" class="headerlink" title="first"></a>first</h3><p>获得由序列首 N 个元素组成的子段.作为<code>*this</code> 的首 <code>Count</code> 个元素上的视图的 <code>span r</code> ，满足 <code>r.data() == this-&gt;data() &amp;&amp; r.size() == Count</code> 。</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">template</span><span class="token operator">&lt;</span> std<span class="token double-colon punctuation">::</span>size_t Count <span class="token operator">></span><span class="token keyword">constexpr</span> std<span class="token double-colon punctuation">::</span>span<span class="token operator">&lt;</span>element_type<span class="token punctuation">,</span> Count<span class="token operator">></span> <span class="token function">first</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">const</span><span class="token punctuation">;</span>
+
+<span class="token keyword">constexpr</span> std<span class="token double-colon punctuation">::</span>span<span class="token operator">&lt;</span>element_type<span class="token punctuation">,</span> std<span class="token double-colon punctuation">::</span>dynamic_extent<span class="token operator">></span> <span class="token function">first</span><span class="token punctuation">(</span> std<span class="token double-colon punctuation">::</span>size_t Count <span class="token punctuation">)</span> <span class="token keyword">const</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="last"><a href="#last" class="headerlink" title="last"></a>last</h3><p>获得由序列末 N 个元素组成的子段.</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">template</span><span class="token operator">&lt;</span> std<span class="token double-colon punctuation">::</span>size_t Count <span class="token operator">></span> <span class="token keyword">constexpr</span> std<span class="token double-colon punctuation">::</span>span<span class="token operator">&lt;</span>element_type<span class="token punctuation">,</span> Count<span class="token operator">></span> <span class="token function">last</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">const</span><span class="token punctuation">;</span>
+
+<span class="token keyword">constexpr</span> std<span class="token double-colon punctuation">::</span>span<span class="token operator">&lt;</span>element_type<span class="token punctuation">,</span> std<span class="token double-colon punctuation">::</span>dynamic_extent<span class="token operator">></span> <span class="token function">last</span><span class="token punctuation">(</span> std<span class="token double-colon punctuation">::</span>size_t Count <span class="token punctuation">)</span> <span class="token keyword">const</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="subspan"><a href="#subspan" class="headerlink" title="subspan"></a>subspan</h3><p>获得子段.获得 span ，它是此 span 的始于偏移 <code>Offset</code> 的 <code>Count</code> 个元素上的视图。若 <code>Count</code> 为 <code>std::dynamic_extent</code> ，则子段中的元素数为 <code>size() - offset</code> （即它结束于 <code>*this</code> 的结尾）。</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">template</span><span class="token operator">&lt;</span> std<span class="token double-colon punctuation">::</span>size_t Offset<span class="token punctuation">,</span> std<span class="token double-colon punctuation">::</span>size_t Count <span class="token operator">=</span> std<span class="token double-colon punctuation">::</span>dynamic_extent <span class="token operator">></span> <span class="token keyword">constexpr</span> std<span class="token double-colon punctuation">::</span>span<span class="token operator">&lt;</span>element_type<span class="token punctuation">,</span> E <span class="token operator">></span> <span class="token function">subspan</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">const</span><span class="token punctuation">;</span><span class="token comment">// 返回的 span 的长度模板实参 E ：</span>
+<span class="token comment">//		若 Count 不是 std::dynamic_extent 则为 Count ；</span>
+<span class="token comment">//		否则，若 Extent 不是 std::dynamic_extent ，则为 Extent - Offset ；</span>
+<span class="token comment">//		否则为 std::dynamic_extent 。</span>
+<span class="token keyword">constexpr</span> std<span class="token double-colon punctuation">::</span>span<span class="token operator">&lt;</span>element_type<span class="token punctuation">,</span> std<span class="token double-colon punctuation">::</span>dynamic_extent<span class="token operator">></span>
+	<span class="token function">subspan</span><span class="token punctuation">(</span> std<span class="token double-colon punctuation">::</span>size_t Offset<span class="token punctuation">,</span>std<span class="token double-colon punctuation">::</span>size_t Count <span class="token operator">=</span> std<span class="token double-colon punctuation">::</span>dynamic_extent <span class="token punctuation">)</span> <span class="token keyword">const</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="非成员函数"><a href="#非成员函数" class="headerlink" title="非成员函数"></a>非成员函数</h2><h3 id="as-bytes"><a href="#as-bytes" class="headerlink" title="as_bytes"></a>as_bytes</h3><p>转换 <code>span</code> 为对其底层字节的视图.以 <code>&#123;reinterpret_cast&lt;const std::byte*&gt;(s.data()), s.size_bytes()&#125;</code>构造的 span 。</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">template</span><span class="token operator">&lt;</span> <span class="token keyword">class</span> <span class="token class-name">T</span><span class="token punctuation">,</span> std<span class="token double-colon punctuation">::</span>size_t N<span class="token operator">></span>std<span class="token double-colon punctuation">::</span>span<span class="token operator">&lt;</span><span class="token keyword">const</span> std<span class="token double-colon punctuation">::</span>byte<span class="token punctuation">,</span> S<span class="token operator">></span> <span class="token function">as_bytes</span><span class="token punctuation">(</span>std<span class="token double-colon punctuation">::</span>span<span class="token operator">&lt;</span>T<span class="token punctuation">,</span> N<span class="token operator">></span> s<span class="token punctuation">)</span> <span class="token keyword">noexcept</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="as-writable-bytes"><a href="#as-writable-bytes" class="headerlink" title="as_writable_bytes"></a>as_writable_bytes</h3><p>转换 span 为对其底层字节的视图.以 <code>&#123;reinterpret_cast&lt;std::byte*&gt;(s.data()), s.size_bytes()&#125;</code> 构造的 span 。</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">template</span><span class="token operator">&lt;</span> <span class="token keyword">class</span> <span class="token class-name">T</span><span class="token punctuation">,</span> std<span class="token double-colon punctuation">::</span>size_t N<span class="token operator">></span>std<span class="token double-colon punctuation">::</span>span<span class="token operator">&lt;</span>std<span class="token double-colon punctuation">::</span>byte<span class="token punctuation">,</span> S<span class="token operator">></span> <span class="token function">as_writable_bytes</span><span class="token punctuation">(</span>std<span class="token double-colon punctuation">::</span>span<span class="token operator">&lt;</span>T<span class="token punctuation">,</span> N<span class="token operator">></span> s<span class="token punctuation">)</span> <span class="token keyword">noexcept</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h2 id="非成员常量"><a href="#非成员常量" class="headerlink" title="非成员常量"></a>非成员常量</h2><h3 id="dynamic-extent"><a href="#dynamic-extent" class="headerlink" title="dynamic_extent"></a>dynamic_extent</h3><p><code>size_t</code> 类型常量，指明 <code>span</code> 拥有动态长度</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">inline</span> <span class="token keyword">constexpr</span> std<span class="token double-colon punctuation">::</span>size_t dynamic_extent <span class="token operator">=</span> std<span class="token double-colon punctuation">::</span><span class="token class-name">numeric_limits</span><span class="token operator">&lt;</span>std<span class="token double-colon punctuation">::</span>size_t<span class="token operator">></span><span class="token double-colon punctuation">::</span><span class="token function">max</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h2 id="辅助模板"><a href="#辅助模板" class="headerlink" title="辅助模板"></a>辅助模板</h2><p><code>std::ranges::enable_borrowed_range</code> 的此特化使得 span 满足 <code>borrowed_range</code> 。</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">template</span><span class="token operator">&lt;</span><span class="token keyword">class</span> <span class="token class-name">T</span><span class="token punctuation">,</span> std<span class="token double-colon punctuation">::</span>size_t Extent<span class="token operator">></span><span class="token keyword">inline</span> <span class="token keyword">constexpr</span> <span class="token keyword">bool</span> ranges<span class="token double-colon punctuation">::</span>enable_borrowed_range<span class="token operator">&lt;</span>std<span class="token double-colon punctuation">::</span>span<span class="token operator">&lt;</span>T<span class="token punctuation">,</span> Extent<span class="token operator">>></span> <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><code>std::ranges::enable_view</code> 的此特化使零或动态长度的 span 满足 <code>view</code> 。非零静态长度的 span 非 <code>default_initializable</code> 从而不是视图。</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">template</span><span class="token operator">&lt;</span><span class="token keyword">class</span> <span class="token class-name">T</span><span class="token punctuation">,</span> std<span class="token double-colon punctuation">::</span>size_t Extent<span class="token operator">></span><span class="token keyword">inline</span> <span class="token keyword">constexpr</span> <span class="token keyword">bool</span> ranges<span class="token double-colon punctuation">::</span>enable_view<span class="token operator">&lt;</span>std<span class="token double-colon punctuation">::</span>span<span class="token operator">&lt;</span>T<span class="token punctuation">,</span> Extent<span class="token operator">>></span> <span class="token operator">=</span>    Extent <span class="token operator">==</span> <span class="token number">0</span> <span class="token operator">||</span> Extent <span class="token operator">==</span> dynamic_extent<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://nonguangxin.cn" rel="external nofollow noreferrer">农光鑫</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://nonguangxin.cn/C-span-API.html">https://nonguangxin.cn/C-span-API.html</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY-NC-SA 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="https://nonguangxin.cn" target="_blank">农光鑫</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/STL/">
+                                    <span class="chip bg-color">STL</span>
+                                </a>
+                            
+                                <a href="/tags/%E8%BF%9E%E7%BB%AD%E5%AE%B9%E5%99%A8%E8%A7%86%E5%9B%BE/">
+                                    <span class="chip bg-color">连续容器视图</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/NongGuangXin/NongGuangXin.github.io/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="https://cdn.jsdelivr.net/gh/NongGuangXin/NongGuangXin.github.io/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/C-string.html">
+                    <div class="card-image">
+                        
+                        
+                        <img src="https://cdn.jsdelivr.net/gh/NongGuangXin/NongGuangXin.github.io/medias/featureimages/18.jpg" class="responsive-img" alt="C++ string">
+                        
+                        <span class="card-title">C++ string</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            cpp标准库容器 string API整理
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2021-05-29
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/C-C/" class="post-category">
+                                    C/C++
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/basic-string/">
+                        <span class="chip bg-color">basic_string</span>
+                    </a>
+                    
+                    <a href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/">
+                        <span class="chip bg-color">字符串</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/C-priority-queue-API.html">
+                    <div class="card-image">
+                        
+                        
+                        <img src="https://cdn.jsdelivr.net/gh/NongGuangXin/NongGuangXin.github.io/medias/featureimages/3.jpg" class="responsive-img" alt="C++ priority_queue API">
+                        
+                        <span class="card-title">C++ priority_queue API</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            cpp标准库容器 priority_queue API整理
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-05-17
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/C-C/" class="post-category">
+                                    C/C++
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/STL/">
+                        <span class="chip bg-color">STL</span>
+                    </a>
+                    
+                    <a href="/tags/%E5%AE%B9%E5%99%A8%E9%80%82%E9%85%8D%E5%99%A8/">
+                        <span class="chip bg-color">容器适配器</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/NongGuangXin/NongGuangXin.github.io/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/NongGuangXin/NongGuangXin.github.io/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/NongGuangXin/NongGuangXin.github.io/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/NongGuangXin/NongGuangXin.github.io/libs/codeBlock/codeShrink.js"></script>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/gh/NongGuangXin/NongGuangXin.github.io/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h1, h2, h3, h4, h5, h6'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h1, h2, h3, h4, h5, h6').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+    <div class="container row center-align" style="margin-bottom: 15px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2020-2022</span>
+            
+            <span id="year">2020</span>
+            <a href="/about" target="_blank">农光鑫</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                class="white-color">102.4k</span>&nbsp;字
+            
+            
+            
+            
+            
+            
+            <span id="busuanzi_container_site_pv">
+                |&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
+                    class="white-color"></span>&nbsp;次
+            </span>
+            
+            
+            <span id="busuanzi_container_site_uv">
+                |&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv"
+                    class="white-color"></span>&nbsp;人
+            </span>
+            
+            <br>
+            
+            <span id="sitetime">载入运行时间...</span>
+            <script>
+                function siteTime() {
+                    var seconds = 1000;
+                    var minutes = seconds * 60;
+                    var hours = minutes * 60;
+                    var days = hours * 24;
+                    var years = days * 365;
+                    var today = new Date();
+                    var startYear = "2020";
+                    var startMonth = "7";
+                    var startDate = "9";
+                    var startHour = "0";
+                    var startMinute = "0";
+                    var startSecond = "0";
+                    var todayYear = today.getFullYear();
+                    var todayMonth = today.getMonth() + 1;
+                    var todayDate = today.getDate();
+                    var todayHour = today.getHours();
+                    var todayMinute = today.getMinutes();
+                    var todaySecond = today.getSeconds();
+                    var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                    var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                    var diff = t2 - t1;
+                    var diffYears = Math.floor(diff / years);
+                    var diffDays = Math.floor((diff / days) - diffYears * 365);
+                    var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+                    var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) /
+                        minutes);
+                    var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours -
+                        diffMinutes * minutes) / seconds);
+                    if (startYear == todayYear) {
+                        document.getElementById("year").innerHTML = todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffDays + " 天 " + diffHours +
+                            " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    } else {
+                        document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffYears + " 年 " + diffDays +
+                            " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    }
+                }
+                setInterval(siteTime, 1000);
+            </script>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://gitee.com/nongguangxin" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:614837785@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=614837785" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 614837785" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="https://cdn.jsdelivr.net/gh/NongGuangXin/NongGuangXin.github.io/libs/materialize/materialize.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/NongGuangXin/NongGuangXin.github.io/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/NongGuangXin/NongGuangXin.github.io/libs/aos/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/NongGuangXin/NongGuangXin.github.io/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/NongGuangXin/NongGuangXin.github.io/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/NongGuangXin/NongGuangXin.github.io/js/matery.js"></script>
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    
+    <script async src="https://cdn.jsdelivr.net/gh/NongGuangXin/NongGuangXin.github.io/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+	
+    
+
+    
+
+    
+
+    
+    <script src="https://cdn.jsdelivr.net/gh/NongGuangXin/NongGuangXin.github.io/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>

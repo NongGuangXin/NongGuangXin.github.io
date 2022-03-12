@@ -1,0 +1,3933 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="X86常用汇编指令--AT&amp;T格式, 技术分享，学习记录。">
+    <meta name="description" content="这里是农光鑫的个人博客">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>X86常用汇编指令--AT&amp;T格式 | 农光鑫的博客</title>
+    <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/NongGuangXin/NongGuangXin.github.io/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/NongGuangXin/NongGuangXin.github.io/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/NongGuangXin/NongGuangXin.github.io/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/NongGuangXin/NongGuangXin.github.io/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/NongGuangXin/NongGuangXin.github.io/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/NongGuangXin/NongGuangXin.github.io/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/NongGuangXin/NongGuangXin.github.io/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/NongGuangXin/NongGuangXin.github.io/css/my.css">
+
+    <script src="https://cdn.jsdelivr.net/gh/NongGuangXin/NongGuangXin.github.io/libs/jquery/jquery.min.js"></script>
+
+<meta name="generator" content="Hexo 5.4.1"></head>
+
+
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="https://cdn.jsdelivr.net/gh/NongGuangXin/NongGuangXin.github.io/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">农光鑫的博客</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="https://cdn.jsdelivr.net/gh/NongGuangXin/NongGuangXin.github.io/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">农光鑫的博客</div>
+        <div class="logo-desc">
+            
+            这里是农光鑫的个人博客
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://gitee.com/nongguangxin" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://gitee.com/nongguangxin" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://cdn.jsdelivr.net/gh/NongGuangXin/NongGuangXin.github.io/medias/featureimages/22.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">X86常用汇编指令--AT&amp;T格式</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/NongGuangXin/NongGuangXin.github.io/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        padding: 35px 0 15px 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        padding-bottom: 30px;
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/AT-T/">
+                                <span class="chip bg-color">AT&amp;T</span>
+                            </a>
+                        
+                            <a href="/tags/x86/">
+                                <span class="chip bg-color">x86</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/AT-T%E6%B1%87%E7%BC%96/" class="post-category">
+                                AT&T汇编
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2020-11-26
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2022-03-01
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    11.5k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    44 分
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/NongGuangXin/NongGuangXin.github.io/libs/prism/prism.css">
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h2 id="1-AT-amp-T汇编"><a href="#1-AT-amp-T汇编" class="headerlink" title="1. AT&amp;T汇编"></a>1. AT&amp;T汇编</h2><h3 id="1-1-说明"><a href="#1-1-说明" class="headerlink" title="1.1 说明"></a>1.1 说明</h3><p>字 = 2字节； 双字 = 4字节</p>
+<p>使用gcc编译工具链（汇编器as，链接器ld）。</p>
+<p>64位系统<a target="_blank" rel="noopener" href="https://elixir.bootlin.com/linux/v4.9.233/source/arch/x86/entry/syscalls/syscall_64.tbl">调用表</a>， 32位系统<a target="_blank" rel="noopener" href="https://elixir.bootlin.com/linux/v4.9.233/source/arch/x86/entry/syscalls/syscall_32.tbl">调用表</a>。</p>
+<hr>
+<h3 id="1-2-通用寄存器"><a href="#1-2-通用寄存器" class="headerlink" title="1.2 通用寄存器"></a>1.2 通用寄存器</h3><table>
+<thead>
+<tr>
+<th>63</th>
+<th>31</th>
+<th>15</th>
+<th>7</th>
+<th align="center">0</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>%rax</td>
+<td>%eax</td>
+<td>%ax</td>
+<td>%al</td>
+<td align="center">返回值</td>
+</tr>
+<tr>
+<td>%rbx</td>
+<td>%ebx</td>
+<td>%bx</td>
+<td>%bl</td>
+<td align="center">被调用者保存</td>
+</tr>
+<tr>
+<td>%rcx</td>
+<td>%ecx</td>
+<td>%cx</td>
+<td>%cl</td>
+<td align="center">第4个参数</td>
+</tr>
+<tr>
+<td>%rdx</td>
+<td>%edx</td>
+<td>%dx</td>
+<td>%dl</td>
+<td align="center">第3个参数</td>
+</tr>
+<tr>
+<td>%rsi</td>
+<td>%esi</td>
+<td>%si</td>
+<td>%sil</td>
+<td align="center">第2个参数</td>
+</tr>
+<tr>
+<td>%rdi</td>
+<td>%edi</td>
+<td>%di</td>
+<td>%dil</td>
+<td align="center">第1个参数</td>
+</tr>
+<tr>
+<td>%rbp</td>
+<td>%ebp</td>
+<td>%bp</td>
+<td>%bpl</td>
+<td align="center">被调用者保存</td>
+</tr>
+<tr>
+<td>%rsp</td>
+<td>%esp</td>
+<td>%sp</td>
+<td>%spl</td>
+<td align="center">栈指针</td>
+</tr>
+<tr>
+<td>%r8</td>
+<td>%r8d</td>
+<td>%r8w</td>
+<td>%r8b</td>
+<td align="center">第5个参数</td>
+</tr>
+<tr>
+<td>%r9</td>
+<td>%r9d</td>
+<td>%r9w</td>
+<td>%r9b</td>
+<td align="center">第6个参数</td>
+</tr>
+<tr>
+<td>%r10</td>
+<td>%r10d</td>
+<td>%r10w</td>
+<td>%r10b</td>
+<td align="center">调用者保存</td>
+</tr>
+<tr>
+<td>%r11</td>
+<td>%r11d</td>
+<td>%r11w</td>
+<td>%r11b</td>
+<td align="center">调用者保存</td>
+</tr>
+<tr>
+<td>%r12</td>
+<td>%12d</td>
+<td>%r12w</td>
+<td>%r12b</td>
+<td align="center">被调用者保存</td>
+</tr>
+<tr>
+<td>%r13</td>
+<td>%13d</td>
+<td>%r13w</td>
+<td>%r13b</td>
+<td align="center">被调用者保存</td>
+</tr>
+<tr>
+<td>%r14</td>
+<td>%r14d</td>
+<td>%r14w</td>
+<td>%r14b</td>
+<td align="center">被调用者保存</td>
+</tr>
+<tr>
+<td>%r15</td>
+<td>%r15d</td>
+<td>%r15w</td>
+<td>%r15b</td>
+<td align="center">被调用者保存</td>
+</tr>
+</tbody></table>
+<p>上面的参数顺序是syscall和call（64位）的参数顺序。在int指令（32位）中，使用堆栈传递参数（也可以使用寄存器或全局变量）</p>
+<p>在int中断中：</p>
+<ul>
+<li>EBX - 第一个参数</li>
+<li>ECX - 第二个参数</li>
+<li>EDX - 第三个参数</li>
+<li>ESI - 第四个参数</li>
+<li>EDI - 第五个参数</li>
+<li>R9 - 第六个参数</li>
+</ul>
+<p>六个以外的参数将通过栈传递</p>
+<p>在细节方面，AX、BX、CX、DX 可以再向下进行划分</p>
+<ul>
+<li><code>AX(Accumulator Register)</code> ：累加寄存器，它主要用于输入/输出和大规模的指令运算。</li>
+<li><code>BX(Base Register)</code>：基址寄存器，用来存储基础访问地址</li>
+<li><code>CX(Count Register)</code>：计数寄存器，CX 寄存器在迭代的操作中会循环计数</li>
+<li><code>DX(data Register)</code>：数据寄存器，它也用于输入/输出操作。它还与 AX 寄存器以及 DX 一起使用，用于涉及大数值的乘法和除法运算。</li>
+</ul>
+<p>这四种寄存器可以分为上半部分和下半部分，用作八个 8 位数据寄存器</p>
+<ul>
+<li><strong>「AX 寄存器可以分为两个独立的 8 位的 AH 和 AL 寄存器；」</strong></li>
+<li><strong>「BX 寄存器可以分为两个独立的 8 位的 BH 和 BL 寄存器；」</strong></li>
+<li><strong>「CX 寄存器可以分为两个独立的 8 位的 CH 和 CL 寄存器；」</strong></li>
+<li><strong>「DX 寄存器可以分为两个独立的 8 位的 DH 和 DL 寄存器；」</strong></li>
+</ul>
+<hr>
+<h3 id="1-3-段寄存器"><a href="#1-3-段寄存器" class="headerlink" title="1.3 段寄存器"></a>1.3 段寄存器</h3><p>CPU 包含四个段寄存器，用作程序指令，数据或栈的基础位置。实际上，对 IBM PC 上所有内存的引用都包含一个段寄存器作为基本位置。</p>
+<p>段寄存器主要包含</p>
+<ul>
+<li><code>CS(Code Segment)</code> ：代码寄存器，程序代码的基础位置</li>
+<li><code>DS(Data Segment)</code>：数据寄存器，变量的基本位置</li>
+<li><code>SS(Stack Segment)</code>：栈寄存器，栈的基础位置</li>
+<li><code>ES(Extra Segment)</code>：其他寄存器，内存中变量的其他基本位置。</li>
+<li><code>FS</code>：其他寄存器，内存中变量的其他基本位置。</li>
+<li><code>GS</code>：其他寄存器，内存中变量的其他基本位置。</li>
+</ul>
+<hr>
+<h3 id="1-4-控制寄存器"><a href="#1-4-控制寄存器" class="headerlink" title="1.4 控制寄存器"></a>1.4 控制寄存器</h3><p>用于确定处理器的操作模式，还有当前正在执行的任务的特性。</p>
+<p>不能直接访问控制寄存器中的值，但是可以把控制寄存器中包含的数据传送到通用寄存器，或改动通用寄存器的数据然后传送给控制寄存器。</p>
+<ul>
+<li><code>CR0</code>:控制曹组模式和处理器状态的系统标志</li>
+<li><code>CR1</code>:当前没有使用</li>
+<li><code>CR2</code>:内存页面错误信息</li>
+<li><code>CR3</code>:内存页面目录信息</li>
+<li><code>CR4</code>:支持处理器特性和说明处理器特性能力的标志。</li>
+</ul>
+<hr>
+<h3 id="1-5-索引寄存器"><a href="#1-5-索引寄存器" class="headerlink" title="1.5 索引寄存器"></a>1.5 索引寄存器</h3><p>索引寄存器主要包含段地址的偏移量，索引寄存器主要分为</p>
+<ul>
+<li><code>RBP(Base Pointer)</code>：基指指针，它是栈寄存器上的偏移量，用来定位栈上变量</li>
+<li><code>RSP(Stack Pointer)</code>: 栈指针，它是栈寄存器上的偏移量，用来定位栈顶</li>
+<li><code>RSI(Source Index)</code>: 变址寄存器，用来拷贝源字符串</li>
+<li><code>RDI(Destination Index)</code>: 目标变址寄存器，用来复制到目标字符串</li>
+<li><code>RIP(Instruction Pointer)</code>: 指令寄存器，存放下一条指令的地址、</li>
+</ul>
+<hr>
+<h3 id="1-6-标志寄存器"><a href="#1-6-标志寄存器" class="headerlink" title="1.6 标志寄存器"></a>1.6 标志寄存器</h3><p>汇编确定操作是否成功的唯一方法。</p>
+<h4 id="状态标志"><a href="#状态标志" class="headerlink" title="状态标志"></a>状态标志</h4><table>
+<thead>
+<tr>
+<th align="center">名称</th>
+<th align="center">标志</th>
+<th align="center">位</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">进位</td>
+<td align="center">CF</td>
+<td align="center">0</td>
+<td>说明运算是否发生进位，进位=1</td>
+</tr>
+<tr>
+<td align="center">偶校验</td>
+<td align="center">PF</td>
+<td align="center">2</td>
+<td>用于指示最后一个字节是否有偶数个1，偶数=1</td>
+</tr>
+<tr>
+<td align="center">辅助进位</td>
+<td align="center">AF</td>
+<td align="center">4</td>
+<td>用于支持二进制编码的十进制运算（BCD），进位=1</td>
+</tr>
+<tr>
+<td align="center">零标志</td>
+<td align="center">ZF</td>
+<td align="center">6</td>
+<td>运算结果为0=1</td>
+</tr>
+<tr>
+<td align="center">符号标志</td>
+<td align="center">SF</td>
+<td align="center">7</td>
+<td>运算结果为负数=1</td>
+</tr>
+<tr>
+<td align="center">方向标志</td>
+<td align="center">DF</td>
+<td align="center">10</td>
+<td>减少=1</td>
+</tr>
+<tr>
+<td align="center">溢出标志</td>
+<td align="center">OF</td>
+<td align="center">11</td>
+<td>指示运算结果有没有溢出，溢出=1。</td>
+</tr>
+<tr>
+<td align="center">身份标志</td>
+<td align="center">ID</td>
+<td align="center">21</td>
+<td>指示是否存在CPUID指令</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>指令</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>CLC</td>
+<td>清空进位标志（设为0）</td>
+</tr>
+<tr>
+<td>CMC</td>
+<td>对进位标志求反</td>
+</tr>
+<tr>
+<td>STC</td>
+<td>设置进位标志（设为1）</td>
+</tr>
+<tr>
+<td>CLD</td>
+<td>将DF标志清零</td>
+</tr>
+<tr>
+<td>STD</td>
+<td>设置DF标志</td>
+</tr>
+</tbody></table>
+<h4 id="系统标志"><a href="#系统标志" class="headerlink" title="系统标志"></a>系统标志</h4><p>用于控制操作系统级别的操作。应用程序绝不应该试图修改系统标志。</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>标志</th>
+<th>位</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>陷阱标志</td>
+<td>TF</td>
+<td>8</td>
+<td>置1时，启用单步模式，处理器一次只执行一条指令</td>
+</tr>
+<tr>
+<td>中断使能标志</td>
+<td>IF</td>
+<td>9</td>
+<td>控制处理器如何相应从外部源接收到的信号</td>
+</tr>
+<tr>
+<td>I/O特权级别标志</td>
+<td>IOPL</td>
+<td>12-13</td>
+<td>表明当前正在运行的任务的I/O特权级别。</td>
+</tr>
+<tr>
+<td>嵌套任务标志</td>
+<td>NT</td>
+<td>14</td>
+<td>控制当前正在运行的任务是否链接到前一个执行的任务</td>
+</tr>
+<tr>
+<td>恢复标志</td>
+<td>RF</td>
+<td>16</td>
+<td>控制处理器在调试模式中如何相应异常</td>
+</tr>
+<tr>
+<td>虚拟8086模式标志</td>
+<td>VM</td>
+<td>17</td>
+<td>表明处理器在8086模式中进行操作，而不是保护模式或时模式</td>
+</tr>
+<tr>
+<td>对准检查标志</td>
+<td>AC</td>
+<td>18</td>
+<td>用于启用内存引用的对准检查</td>
+</tr>
+<tr>
+<td>虚拟中断标志</td>
+<td>VIF</td>
+<td>19</td>
+<td>当处理器在虚拟模式中进行操作时，VIF起IF标志的作用</td>
+</tr>
+<tr>
+<td>虚拟中断挂起标志</td>
+<td>VIP</td>
+<td>20</td>
+<td>当处理器在虚拟模式中进行操作时，VIP表示一个中断正在被挂起</td>
+</tr>
+<tr>
+<td>识别标志</td>
+<td>ID</td>
+<td>21</td>
+<td>表示处理器是否支持CPUID指令</td>
+</tr>
+</tbody></table>
+<hr>
+<h3 id="1-7-专用寄存器"><a href="#1-7-专用寄存器" class="headerlink" title="1.7 专用寄存器"></a>1.7 专用寄存器</h3><p>用于大整数和浮点运算。</p>
+<p>MMX （Multimedia Extension）为一种 SIMD 技术，即可通过一条指令执行多个数据运算；</p>
+<p>SSE（Streaming SIMD Extension，流化SIMD拓展）</p>
+<h4 id="XMM寄存器"><a href="#XMM寄存器" class="headerlink" title="XMM寄存器"></a>XMM寄存器</h4><p>和SSE技术一起引入。提供用于处理打包数据的16个128位XMM寄存器（`XMM0 - XMM15）。</p>
+<p>提供4种额外的打包带符号整数数据类型：</p>
+<ul>
+<li>128位打包字节整数，即16个8字节整数。</li>
+<li>128位打包字整数，即8个16位整数。</li>
+<li>128位打包双字整数，即4个32位整数。</li>
+<li>128位打包四字整数，即2个64位整数。</li>
+</ul>
+<p>提供2种额外的打包浮点数据类型：</p>
+<ul>
+<li>128位打包单精度浮点，即4个32位单精度浮点。</li>
+<li>128位打包双精度浮点，即2个64位双精度浮点。</li>
+</ul>
+<p><code>movdqa</code>和<code>movdqu</code>指令用于把128位数据传送到XMM寄存器中。</p>
+<pre class="line-numbers language-assembly" data-language="assembly"><code class="language-assembly">movdqa	src, des<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>助记符A和U分别代表对准和不对准，他们表示数据是如何存储在内存中的。对于对准16个字节边界的数据，就使用A选项；否则，使用U选项。</p>
+<h4 id="MMX寄存器"><a href="#MMX寄存器" class="headerlink" title="MMX寄存器"></a>MMX寄存器</h4><p>也是FPU寄存器。共有8个64位寄存器，分别为<code>MM0 – MM7</code>他们直接映射到FPU寄存器的R0到R7.但是，和FPU寄存器不同，MM寄存器是静态的，他们不能作为堆栈使用。</p>
+<p>提供三种新的整形：</p>
+<ul>
+<li>64位打包字节整数，即8个8字节整数。</li>
+<li>64位打包字整数，即4个16位整数。</li>
+<li>64位打包双字整数，即2个32位整数。</li>
+</ul>
+<p>可以使用<code>movq</code>指令把数据传送到MMX寄存器</p>
+<pre class="line-numbers language-assembly" data-language="assembly"><code class="language-assembly">movq	src, des<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>浮点类型：</p>
+<table>
+<thead>
+<tr>
+<th>数据类型</th>
+<th>长度</th>
+<th>精度（位）</th>
+<th>小数位数精度</th>
+<th>小数范围</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>单精度</td>
+<td>32</td>
+<td>24</td>
+<td>7</td>
+<td>1.18 * 10 ^ -38至3.40 * 10 ^ 38</td>
+</tr>
+<tr>
+<td>双精度</td>
+<td>64</td>
+<td>53</td>
+<td>15</td>
+<td>2.23 * 10 ^ -308至1.79 * 10 ^ 308</td>
+</tr>
+<tr>
+<td>扩展精度</td>
+<td>80</td>
+<td>64</td>
+<td>19</td>
+<td>3.37 * 10 ^ -4932至1.18 * 10 ^ 4932</td>
+</tr>
+</tbody></table>
+<hr>
+<h3 id="1-8-寻址模式"><a href="#1-8-寻址模式" class="headerlink" title="1.8 寻址模式"></a>1.8 寻址模式</h3><table>
+<thead>
+<tr>
+<th align="center">类型</th>
+<th>格式</th>
+<th>操作数值</th>
+<th>名称</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">立即数</td>
+<td>$Imm</td>
+<td>Imm</td>
+<td>立即数寻址</td>
+</tr>
+<tr>
+<td align="center">寄存器</td>
+<td>$ r_a $</td>
+<td>$R[r_a]$</td>
+<td>寄存器寻址</td>
+</tr>
+<tr>
+<td align="center">存储器</td>
+<td>Imm</td>
+<td>M[ Imm ]</td>
+<td>绝对寻址</td>
+</tr>
+<tr>
+<td align="center">存储器</td>
+<td>($r_a$)</td>
+<td>M[ R[$r_a$] ]</td>
+<td>间接寻址</td>
+</tr>
+<tr>
+<td align="center">存储器</td>
+<td>Imm($r_a$)</td>
+<td>M[ Imm + R[$r_a$] ]</td>
+<td>(基址+偏移量)寻址</td>
+</tr>
+<tr>
+<td align="center">存储器</td>
+<td>($r_b, r_i$)</td>
+<td>M[ R[$r_b$] + R[$r_i$] ]</td>
+<td>变址寻址</td>
+</tr>
+<tr>
+<td align="center">存储器</td>
+<td>Imm($r_b, r_i$)</td>
+<td>M[ Imm + R[$r_b$] + R[$r_i$] ]</td>
+<td>变址寻址</td>
+</tr>
+<tr>
+<td align="center">存储器</td>
+<td>($, r_i, s$)</td>
+<td>M[ R[$r_i$] * s ]</td>
+<td>比例变址寻址</td>
+</tr>
+<tr>
+<td align="center">存储器</td>
+<td>Imm($, r_i, s$)</td>
+<td>M[ Imm + R[$r_i$] * s ]</td>
+<td>比例变址寻址</td>
+</tr>
+<tr>
+<td align="center">存储器</td>
+<td>($r_b, r_i, s$)</td>
+<td>M[ R[$r_b$] + R[$r_i$] * s ]</td>
+<td>比例变址寻址</td>
+</tr>
+<tr>
+<td align="center">存储器</td>
+<td>Imm($r_b, r_i, s$)</td>
+<td>M[ Imm + R[$r_b$] + R[$r_i$] * s ]</td>
+<td>比例变址寻址</td>
+</tr>
+</tbody></table>
+<p>符号r_a表示任意寄存器a，用R[r_a]来表示它的值。</p>
+<p>M_b[Addr]表示对存储在内存中从地址开始的b个字节值的引用，为了简便，我们通常省去下标b。</p>
+<hr>
+<h3 id="1-9-常用段"><a href="#1-9-常用段" class="headerlink" title="1.9 常用段"></a>1.9 常用段</h3><p>数据段</p>
+<p><code>.data</code>, <code>.rodata</code></p>
+<pre class="line-numbers language-asm" data-language="asm"><code class="language-asm">&#x2F;&#x2F; 设置变量
+.section .data
+pi:
+	.float 3.14159
+sizes:
+	.long 100, 150, 200
+numer:
+	.int 62,35,47
+buffer:
+	.fill 10000 # 创建10000字节的缓冲区，并用零填充。
+
+&#x2F;&#x2F; 设置常量
+.equ factor, 3
+.equ MAXLEN, 100
+.equ LINUX_SYS_CALL, 0x80<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>BSS段</p>
+<p><code>.comm</code>:声明未初始化的数据的通用内存区域</p>
+<p><code>.lcomm</code>:声明未初始化的数据本地通用内存区域（static）</p>
+<p>格式：<code>.comm symbol, length</code></p>
+<pre class="line-numbers language-asm" data-language="asm"><code class="language-asm">.section .bss
+.lcomm buffer, 1000<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>bss段声明的数据不包含在可执行程序中。</p>
+<p>文本段</p>
+<p>程序指令、代码的位置</p>
+<pre class="line-numbers language-asm" data-language="asm"><code class="language-asm">.section .text
+.globl _start
+_start:
+	...<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<hr>
+<h3 id="1-10-基本数据类型"><a href="#1-10-基本数据类型" class="headerlink" title="1.10 基本数据类型"></a>1.10 基本数据类型</h3><table>
+<thead>
+<tr>
+<th>类型</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>.ascii</td>
+<td>非空字符’\0’(即:二进制0)结束的字符串</td>
+</tr>
+<tr>
+<td>.asciz</td>
+<td>以空字符’\0’(即:二进制0)结束的字符串</td>
+</tr>
+<tr>
+<td>.string</td>
+<td>以空字符’\0’(即:二进制0)结束的字符串</td>
+</tr>
+<tr>
+<td>.byte</td>
+<td>定长1字节整型,8位</td>
+</tr>
+<tr>
+<td>.short</td>
+<td>定长2字节整型,16位</td>
+</tr>
+<tr>
+<td>.word</td>
+<td>定长2字节整型,16位</td>
+</tr>
+<tr>
+<td>.hword</td>
+<td>定长2字节整型,16位</td>
+</tr>
+<tr>
+<td>.int</td>
+<td>定长4字节整型,32位</td>
+</tr>
+<tr>
+<td>.long</td>
+<td>定长4字节整型,32位</td>
+</tr>
+<tr>
+<td>.quad</td>
+<td>定长8字节整型,64位</td>
+</tr>
+<tr>
+<td>.octa</td>
+<td>定长16字节整型,128位</td>
+</tr>
+<tr>
+<td>.uleb128</td>
+<td>变长无符号整数,最多128位(16字节)</td>
+</tr>
+<tr>
+<td>.sleb128</td>
+<td>变长有符号整数,最多128位(16字节)</td>
+</tr>
+<tr>
+<td>.single</td>
+<td>定长单精度浮点数,4字节(32位)</td>
+</tr>
+<tr>
+<td>.float</td>
+<td>定长单精度浮点数,4字节(32位)</td>
+</tr>
+<tr>
+<td>.double</td>
+<td>定长双精度浮点数,8字节(64位)</td>
+</tr>
+</tbody></table>
+<hr>
+<h3 id="1-11-汇编指令"><a href="#1-11-汇编指令" class="headerlink" title="1.11 汇编指令"></a>1.11 汇编指令</h3><p>AT&amp;T格式：&lt;汇编指令&gt;  &lt;源操作数&gt;  &lt;目标操作数&gt;</p>
+<p>​                    &lt;汇编指令&gt;  &lt;操作数&gt;</p>
+<h4 id="数据传送指令"><a href="#数据传送指令" class="headerlink" title="数据传送指令"></a>数据传送指令</h4><table>
+<thead>
+<tr>
+<th>指令</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>movb</td>
+<td>传送1字节</td>
+</tr>
+<tr>
+<td>movw</td>
+<td>传送字（2字节）</td>
+</tr>
+<tr>
+<td>movl</td>
+<td>传送双字（4字节）</td>
+</tr>
+<tr>
+<td>movq</td>
+<td>传送四字（8字节）</td>
+</tr>
+</tbody></table>
+<p>不能从内存传送到内存。</p>
+<pre class="line-numbers language-asm" data-language="asm"><code class="language-asm">movl %eax, %ebx
+movl $0, %eax
+
+.section .data
+value:
+	.int 1
+list:
+	.int 1,2,3,4,5
+movl value, %eax  # 传数据
+movl %eax, value  # 将数据传到对应的内存位置
+movl $value, %eax  # 传送地址
+movl %eax, (%edi) # 将数据传到%edi保存的内存地址
+movl %eax, 4(%edi) # 地址偏移
+
+movl $2,%edi
+movl list(, %edi, 4), %eax # 变址寻址<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>变址寻址: <code>movl base(off, index, size), %eax == (%eax = base + off + index*size)</code></p>
+<h5 id="拓展整数"><a href="#拓展整数" class="headerlink" title="拓展整数"></a>拓展整数</h5><h6 id="拓展无符号整数"><a href="#拓展无符号整数" class="headerlink" title="拓展无符号整数"></a>拓展无符号整数</h6><pre class="line-numbers language-assembly" data-language="assembly"><code class="language-assembly">movzx	src, des<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>把长度小的无符号整数传送给长度大的无符号整数。</p>
+<h6 id="拓展有符号整数"><a href="#拓展有符号整数" class="headerlink" title="拓展有符号整数"></a>拓展有符号整数</h6><p>把长度小的带符号整数传送给长度大的带符号整数。</p>
+<pre class="line-numbers language-asm" data-language="asm"><code class="language-asm">movsx	src, des<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h5 id="传送BCD值"><a href="#传送BCD值" class="headerlink" title="传送BCD值"></a>传送BCD值</h5><p><code>FBLD</code>和<code>FBSTP</code>指令把80位打包BCD值加载到FPU寄存器堆栈中以及从FPU寄存器堆栈获取这些值。</p>
+<pre class="line-numbers language-assembly" data-language="assembly"><code class="language-assembly">fbld	src<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h5 id="传送浮点值"><a href="#传送浮点值" class="headerlink" title="传送浮点值"></a>传送浮点值</h5><p><code>FLD</code>指令用于把浮点值传送入FPU堆栈，<code>FLDS</code>用于单精度浮点数，<code>FLDL</code>用于双精度浮点。</p>
+<p><code>FST</code>指令用于从FPU堆栈获取浮点值，<code>FSTS</code>用于单精度浮点数，<code>FSTL</code>用于双精度浮点。</p>
+<pre class="line-numbers language-assembly" data-language="assembly"><code class="language-assembly">flds	src<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h5 id="传送SSE浮点值"><a href="#传送SSE浮点值" class="headerlink" title="传送SSE浮点值"></a>传送SSE浮点值</h5><p>用于打包单精度浮点数据</p>
+<table>
+<thead>
+<tr>
+<th>指令</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>MOVAPS</td>
+<td>把4个对准的打包单精度值传送到XMM寄存器或内存</td>
+</tr>
+<tr>
+<td>MOVUPS</td>
+<td>把4个不对准的打包单精度值传送到XMM寄存器或内存</td>
+</tr>
+<tr>
+<td>MOVSS</td>
+<td>把1个单精度值传送到寄存器或内存的低双字</td>
+</tr>
+<tr>
+<td>MOVLPS</td>
+<td>把2个单精度值传送到寄存器或内存的低四字</td>
+</tr>
+<tr>
+<td>MOVHPS</td>
+<td>把2个单精度值传送到寄存器或内存的高四字</td>
+</tr>
+<tr>
+<td>MOVLHPS</td>
+<td>把2个单精度值从低四字传送到高四字</td>
+</tr>
+<tr>
+<td>MOVHLPS</td>
+<td>把2个单精度值从高四字传送到低四字</td>
+</tr>
+</tbody></table>
+<h5 id="传送SSE2浮点值"><a href="#传送SSE2浮点值" class="headerlink" title="传送SSE2浮点值"></a>传送SSE2浮点值</h5><p>用于打包双精度浮点数据类型</p>
+<table>
+<thead>
+<tr>
+<th>指令</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>MOVAPD</td>
+<td>把2个对准的双精度值传送到XMM寄存器或内存</td>
+</tr>
+<tr>
+<td>MOVUPD</td>
+<td>把2个不对准的双精度值传送到XMM寄存器或内存</td>
+</tr>
+<tr>
+<td>MOVSD</td>
+<td>把1个双精度值传送到XMM寄存器或内存的低四字</td>
+</tr>
+<tr>
+<td>MOVHPD</td>
+<td>把1个双精度值传送到XMM寄存器或内存的高四字</td>
+</tr>
+<tr>
+<td>MOVLPD</td>
+<td>把1个双精度值传送到XMM寄存器或内存的低四字</td>
+</tr>
+</tbody></table>
+<h5 id="SSE3"><a href="#SSE3" class="headerlink" title="SSE3"></a>SSE3</h5><table>
+<thead>
+<tr>
+<th>指令</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>MOVSHDUP</td>
+<td>从内存或XMM寄存器传送128位值，复制第2和第4个32位元素(DCBA –&gt; DDBB)</td>
+</tr>
+<tr>
+<td>MOVSLDUP</td>
+<td>从内存或XMM寄存器传送128位值，复制第1和第3个32位元素(DCBA –&gt; CCAA)</td>
+</tr>
+<tr>
+<td>MOVDDUP</td>
+<td>从内存或XMM寄存器传送64位双精度浮点值，把它复制到128位XMM寄存器(A –&gt; AA)</td>
+</tr>
+</tbody></table>
+<h4 id="条件传送指令"><a href="#条件传送指令" class="headerlink" title="条件传送指令"></a>条件传送指令</h4><p>cmov 根据标志寄存器的值触发跳转操作。</p>
+<h6 id="无符号传送指令"><a href="#无符号传送指令" class="headerlink" title="无符号传送指令"></a>无符号传送指令</h6><table>
+<thead>
+<tr>
+<th>指令对</th>
+<th>描述</th>
+<th>ELAGES状态</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>cmova / comvnbe</td>
+<td>大于/不小于或等于</td>
+<td>(CF or ZF) = 0</td>
+</tr>
+<tr>
+<td>cmovae / cmovnb</td>
+<td>大于或等于/不小于</td>
+<td>CF = 0</td>
+</tr>
+<tr>
+<td>cmovnc</td>
+<td>无进位</td>
+<td>CF = 0</td>
+</tr>
+<tr>
+<td>cmovb / cmovnae</td>
+<td>小于/不大于或等于</td>
+<td>CF = 1</td>
+</tr>
+<tr>
+<td>cmovc</td>
+<td>进位</td>
+<td>CF = 1</td>
+</tr>
+<tr>
+<td>cmovbe / cmovna</td>
+<td>小于或等于/不大于</td>
+<td>(CF or ZF) = 1</td>
+</tr>
+<tr>
+<td>cmove / cmovz</td>
+<td>等于 / 零</td>
+<td>ZF  = 1</td>
+</tr>
+<tr>
+<td>cmovne / cmovnz</td>
+<td>不等于/不为零</td>
+<td>ZF = 0</td>
+</tr>
+<tr>
+<td>cmovp / cmovpe</td>
+<td>奇偶校验/偶校验</td>
+<td>PF = 1</td>
+</tr>
+<tr>
+<td>cmovnp / cmovpo</td>
+<td>非奇偶校验/偶校验</td>
+<td>PF = 0</td>
+</tr>
+</tbody></table>
+<h6 id="带符号传送指令"><a href="#带符号传送指令" class="headerlink" title="带符号传送指令"></a>带符号传送指令</h6><table>
+<thead>
+<tr>
+<th>指令对</th>
+<th>描述</th>
+<th>EFLAGS状态</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>cmovge / cmovnl</td>
+<td>大于或者等于/不小于</td>
+<td>(SF 亦或 OF) = 0</td>
+</tr>
+<tr>
+<td>cmovl / cmovnge</td>
+<td>小于 / 不大于或等于</td>
+<td>(SF 亦或 OF) = 1</td>
+</tr>
+<tr>
+<td>cmovle / cmovng</td>
+<td>小于或者等于 / 不大于</td>
+<td>((SF 亦或 OF) 或 ZF) = 1</td>
+</tr>
+<tr>
+<td>cmovo</td>
+<td>溢出</td>
+<td>OF = 1</td>
+</tr>
+<tr>
+<td>cmovno</td>
+<td>未溢出</td>
+<td>OF = 1</td>
+</tr>
+<tr>
+<td>cmovs</td>
+<td>带符号（负）</td>
+<td>SF = 1</td>
+</tr>
+<tr>
+<td>cmovns</td>
+<td>无符号（非负）</td>
+<td>SF = 0</td>
+</tr>
+</tbody></table>
+<pre class="line-numbers language-asm" data-language="asm"><code class="language-asm">movl  value, %ecx
+cmp   %ebx, %ecx
+cmova %ecx, %ebx<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>把value加载到ecx，然后使用cmp指令把这个值和ebx中的值比较。cmp指令从第二个操作数减去第一个操作数并设置EFLAGS寄存器。如果ecx中的值大于ebx中的值，就是用cmova指令把ebx中的值替换为ecx中的值。</p>
+<h4 id="数据交换指令"><a href="#数据交换指令" class="headerlink" title="数据交换指令"></a>数据交换指令</h4><table>
+<thead>
+<tr>
+<th>指令</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>xchg</td>
+<td>在两个寄存器之间或者寄存器和内存位置之间交换值</td>
+</tr>
+<tr>
+<td>bswap</td>
+<td>反转一个32位寄存器中的字节顺序</td>
+</tr>
+<tr>
+<td>xadd</td>
+<td>交换两个值并把总和存储在目标操作数中</td>
+</tr>
+<tr>
+<td>cmpxchg</td>
+<td>把一个值和一个外部值进行比较，并且交换它和另一个值</td>
+</tr>
+<tr>
+<td>cmpxchg8b</td>
+<td>比较两个64位值，并且交换它们。</td>
+</tr>
+</tbody></table>
+<h5 id="1-xchg"><a href="#1-xchg" class="headerlink" title="1. xchg"></a>1. xchg</h5><pre class="line-numbers language-asm" data-language="asm"><code class="language-asm">xchg	opd1, opd2<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>opd1,opd2不能都是内存位置，长度必须相同。当其中一个操作数是内存位置时，处理器的lock信号被自动表明，防止在交换过程中任何其他处理器访问这个内存位置。这个指令比较耗时，可能对程序性能有不良的影响。</p>
+<h5 id="2-bswap"><a href="#2-bswap" class="headerlink" title="2. bswap"></a>2. bswap</h5><pre class="line-numbers language-asm" data-language="asm"><code class="language-asm">bswap	opd<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>反转一个32位寄存器中的字节顺序，比如将小端转换为大端（或大端转换为小端）。</p>
+<h5 id="3-xadd"><a href="#3-xadd" class="headerlink" title="3. xadd"></a>3. xadd</h5><pre class="line-numbers language-asm" data-language="asm"><code class="language-asm">xadd	src, des<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>src必须是寄存器，des包含相加的结果。</p>
+<h5 id="4-cmpxchg"><a href="#4-cmpxchg" class="headerlink" title="4. cmpxchg"></a>4. cmpxchg</h5><pre class="line-numbers language-asm" data-language="asm"><code class="language-asm">cmpxchg		src, des<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>比较目标操作数和eax，ax或al寄存器的值。如果两个值相等，就把源操作数的值加载到目标操作数中。如果两个值不等，就把目标操作数加载到eax，ax，或者al寄存器中。</p>
+<h5 id="5-cmpxchg8b"><a href="#5-cmpxchg8b" class="headerlink" title="5. cmpxchg8b"></a>5. cmpxchg8b</h5><pre class="line-numbers language-asm" data-language="asm"><code class="language-asm">cmpxchg8b des<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>des引用一个内存位置，其中的8字节值会与EDX和EAX寄存器的值进行比较，（EDX是高位寄存器，EAX是低位寄存器）。如果目标值和EDX:EAX寄存器的值匹配，就把位于ECX:EBX寄存器的值存送给目标内存位置。如果不匹配，就把目标内存位置地址中的值加载到EDX:EAX寄存器对中。</p>
+<h4 id="数据转换指令"><a href="#数据转换指令" class="headerlink" title="数据转换指令"></a>数据转换指令</h4><p>用于不同数据类型之间的转换</p>
+<table>
+<thead>
+<tr>
+<th>指令</th>
+<th>转换</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>CVTDQ2PD</td>
+<td>打包双字整数到打包双精度FP（XMM）</td>
+</tr>
+<tr>
+<td>CVTDQ2PS</td>
+<td>打包双字整数到打包单精度FP（XMM）</td>
+</tr>
+<tr>
+<td>CVTPD2DQ</td>
+<td>打包双精度FP到打包双字整数（XMM）</td>
+</tr>
+<tr>
+<td>CVTPD2PI</td>
+<td>打包双精度FP到打包双字整数（MMX）</td>
+</tr>
+<tr>
+<td>CVTPD2PS</td>
+<td>打包双精度FP到打包单精度FP（XMM）</td>
+</tr>
+<tr>
+<td>CVTPI2DP</td>
+<td>打包双字整数到打包双精度FP（XMM）</td>
+</tr>
+<tr>
+<td>CVTPI2PS</td>
+<td>打包双字整数到打包单精度FP（XMM）</td>
+</tr>
+<tr>
+<td>CVTPS2DQ</td>
+<td>打包单精度FP到打包双字整数（XMM）</td>
+</tr>
+<tr>
+<td>CVTPS2PD</td>
+<td>打包单精度FP到打包双精度FP（XMM）</td>
+</tr>
+<tr>
+<td>CVTPS2PI</td>
+<td>打包单精度FP到打包双字整数（MMX）</td>
+</tr>
+<tr>
+<td>CVTTPD2PI</td>
+<td>打包双精度FP到打包双字整数（MMX，截断）</td>
+</tr>
+<tr>
+<td>CVTTPD2DQ</td>
+<td>打包双精度FP到打包双字整数（XMM，截断）</td>
+</tr>
+<tr>
+<td>CVTTPS2DQ</td>
+<td>打包单精度FP到打包双字整数（XMM，截断）</td>
+</tr>
+<tr>
+<td>CVTTPS2PI</td>
+<td>打包单精度FP到打包双字整数（MMX，截断）</td>
+</tr>
+</tbody></table>
+<h4 id="压入和弹出所有寄存器"><a href="#压入和弹出所有寄存器" class="headerlink" title="压入和弹出所有寄存器"></a>压入和弹出所有寄存器</h4><table>
+<thead>
+<tr>
+<th>指令</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>PUSHA / POPA</td>
+<td>压入或弹出所有16位通用寄存器</td>
+</tr>
+<tr>
+<td>PUSHAD / POPAD</td>
+<td>压入或弹出所有32位通用寄存器</td>
+</tr>
+<tr>
+<td>PUSHF / POPF</td>
+<td>压入或弹出EFLAGS寄存器的低16位</td>
+</tr>
+<tr>
+<td>PUSHFD / POPFD</td>
+<td>压入或弹出EFLAGS寄存器的全部32位</td>
+</tr>
+</tbody></table>
+<h4 id="无条件分支"><a href="#无条件分支" class="headerlink" title="无条件分支"></a>无条件分支</h4><h5 id="跳转"><a href="#跳转" class="headerlink" title="跳转"></a>跳转</h5><pre class="line-numbers language-asm" data-language="asm"><code class="language-asm">jmp  location<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>jmp， je， jne， </p>
+<p>signed：jl，jle，jg，jge，</p>
+<p>unsigned：jb，jbe，ja，jae</p>
+<h5 id="调用"><a href="#调用" class="headerlink" title="调用"></a>调用</h5><pre class="line-numbers language-asm" data-language="asm"><code class="language-asm">call addr<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<pre class="line-numbers language-asm" data-language="asm"><code class="language-asm">function_lable:
+	pushl 	%ebp
+	movl	%esp, %ebp
+	&lt; todo &gt;
+	movl	%ebp, %esp
+	popl	%ebp
+	ret<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h5 id="中断"><a href="#中断" class="headerlink" title="中断"></a>中断</h5><p>硬件中断</p>
+<p>软件中断</p>
+<pre class="line-numbers language-assembly" data-language="assembly"><code class="language-assembly">int		$0x80	<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h4 id="条件分支"><a href="#条件分支" class="headerlink" title="条件分支"></a>条件分支</h4><h5 id="条件跳转指令"><a href="#条件跳转指令" class="headerlink" title="条件跳转指令"></a>条件跳转指令</h5><p>条件分支只和EFLAGS寄存器中的五位有关：</p>
+<ul>
+<li>进位（CF）- 第0位</li>
+<li>溢出（OF）- 第11位</li>
+<li>奇偶校验（PF） - 第2位</li>
+<li>符号（SF）- 第7位</li>
+<li>零（ZF） - 第6位</li>
+</ul>
+<pre class="line-numbers language-assembly" data-language="assembly"><code class="language-assembly">jxx		addr<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<table>
+<thead>
+<tr>
+<th>指令</th>
+<th>描述</th>
+<th>EFLAGS</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ja</td>
+<td>如果大于（above），则跳转</td>
+<td>CF = 0 and ZF = 0</td>
+</tr>
+<tr>
+<td>jae</td>
+<td>大于（above）或等于</td>
+<td>CF = 0</td>
+</tr>
+<tr>
+<td>jb</td>
+<td>小于（above）</td>
+<td>CF = 1</td>
+</tr>
+<tr>
+<td>jbe</td>
+<td>小于（above）等于</td>
+<td>CF = 1 or ZF = 1</td>
+</tr>
+<tr>
+<td>jc</td>
+<td>进位</td>
+<td>CF = 1</td>
+</tr>
+<tr>
+<td>jcxz</td>
+<td>如果CX寄存器为0，则跳转</td>
+<td></td>
+</tr>
+<tr>
+<td>jecxz</td>
+<td>如果ECX寄存器为0，则跳转</td>
+<td></td>
+</tr>
+<tr>
+<td>je</td>
+<td>如果相等，则跳转</td>
+<td>ZF = 1</td>
+</tr>
+<tr>
+<td>jg</td>
+<td>大于（greater）</td>
+<td>ZF = 0 and SF = 0F</td>
+</tr>
+<tr>
+<td>jge</td>
+<td>大于（greater）或等于</td>
+<td>SF = OF</td>
+</tr>
+<tr>
+<td>jl</td>
+<td>小于（less）</td>
+<td>SF &lt;&gt; OF</td>
+</tr>
+<tr>
+<td>jle</td>
+<td>小于（less）或等于</td>
+<td>ZF = 1 or SF &lt;&gt; OF</td>
+</tr>
+<tr>
+<td>jna</td>
+<td>不大于（above）</td>
+<td>CF = 1 or ZF = 1</td>
+</tr>
+<tr>
+<td>jnae</td>
+<td>不大于（above）或等于</td>
+<td>CF = 1</td>
+</tr>
+<tr>
+<td>jnb</td>
+<td>不小于（below）</td>
+<td>CF = 0</td>
+</tr>
+<tr>
+<td>jnbe</td>
+<td>不小于（below）或等于</td>
+<td>CF = 0 and ZF = 0</td>
+</tr>
+<tr>
+<td>jnc</td>
+<td>无进位</td>
+<td>CF = 0</td>
+</tr>
+<tr>
+<td>jne</td>
+<td>不等于</td>
+<td>ZF = 0</td>
+</tr>
+<tr>
+<td>jng</td>
+<td>不大于（greater）</td>
+<td>ZF = 1 or SF &lt;&gt; OF</td>
+</tr>
+<tr>
+<td>gnge</td>
+<td>不大于（greater）或等于</td>
+<td>SF &lt;&gt; OF</td>
+</tr>
+<tr>
+<td>jnl</td>
+<td>不小于（less）</td>
+<td>SF = OF</td>
+</tr>
+<tr>
+<td>jnle</td>
+<td>不小于（less）或等于</td>
+<td>ZF = 0 and SF = 0F</td>
+</tr>
+<tr>
+<td>jno</td>
+<td>不溢出</td>
+<td>OF = 0</td>
+</tr>
+<tr>
+<td>JNP</td>
+<td>不奇偶校验</td>
+<td>PF = 0</td>
+</tr>
+<tr>
+<td>jns</td>
+<td>无符号</td>
+<td>SF = 0</td>
+</tr>
+<tr>
+<td>jnz</td>
+<td>非零</td>
+<td>ZF = 0</td>
+</tr>
+<tr>
+<td>jo</td>
+<td>溢出</td>
+<td>OF = 1</td>
+</tr>
+<tr>
+<td>jp</td>
+<td>奇偶校验</td>
+<td>PF = 1</td>
+</tr>
+<tr>
+<td>jpe</td>
+<td>偶校验</td>
+<td>PF = 1</td>
+</tr>
+<tr>
+<td>jpo</td>
+<td>奇校验</td>
+<td>PF = 0</td>
+</tr>
+<tr>
+<td>js</td>
+<td>带符号</td>
+<td>SF = 1</td>
+</tr>
+<tr>
+<td>jz</td>
+<td>为零</td>
+<td>ZF = 1</td>
+</tr>
+</tbody></table>
+<p>无符号使用above和below，有符号使用greater和less.</p>
+<h5 id="高级条件分支"><a href="#高级条件分支" class="headerlink" title="高级条件分支"></a>高级条件分支</h5><p>if、else、while、for等反汇编查看代码。</p>
+<h5 id="优化分支指令"><a href="#优化分支指令" class="headerlink" title="优化分支指令"></a>优化分支指令</h5><h6 id="消除分支"><a href="#消除分支" class="headerlink" title="消除分支"></a>消除分支</h6><p>使用条件数据传送指令，或减少跳转。</p>
+<h6 id="首先编写可预测分支的代码"><a href="#首先编写可预测分支的代码" class="headerlink" title="首先编写可预测分支的代码"></a>首先编写可预测分支的代码</h6><p>把最可能采用的代码安排在向前跳转的顺序执行语句中</p>
+<h6 id="展开循环"><a href="#展开循环" class="headerlink" title="展开循环"></a>展开循环</h6><p>尽可能地消除小型循环</p>
+<h4 id="循环指令"><a href="#循环指令" class="headerlink" title="循环指令"></a>循环指令</h4><pre class="line-numbers language-assembly" data-language="assembly"><code class="language-assembly">loop	addr<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<table>
+<thead>
+<tr>
+<th>指令</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>LOOP</td>
+<td>循环直到ECX寄存器为零</td>
+</tr>
+<tr>
+<td>LOOPE / LOOPZ</td>
+<td>循环直到ECX寄存器为0，或没有设置ZF标志</td>
+</tr>
+<tr>
+<td>LOOPNE / LOOPNZ</td>
+<td>循环直到ECX寄存器为0，或设置了ZF标志</td>
+</tr>
+</tbody></table>
+<h4 id="比较指令"><a href="#比较指令" class="headerlink" title="比较指令"></a>比较指令</h4><pre class="line-numbers language-assembly" data-language="assembly"><code class="language-assembly">cmp	 opd1, opd2<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>把第二个操作数和第一个操作数比较。在幕后执行减法操作(<code>opd2 - opd1</code>).</p>
+<h4 id="整数运算指令"><a href="#整数运算指令" class="headerlink" title="整数运算指令"></a>整数运算指令</h4><p>整数运算包括加，减，乘，除</p>
+<h5 id="加"><a href="#加" class="headerlink" title="加"></a>加</h5><pre class="line-numbers language-assembly" data-language="assembly"><code class="language-assembly">add	src des<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>运算结果：<code>des = src + des</code></p>
+<pre class="line-numbers language-assembly" data-language="assembly"><code class="language-assembly">adc	src des<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>adc指令执行两个整数加法，并且把前一个add指令产生的进位标志的值包含其中。</p>
+<h5 id="减"><a href="#减" class="headerlink" title="减"></a>减</h5><pre class="line-numbers language-assembly" data-language="assembly"><code class="language-assembly">sub src, des<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>运算结果：<code>des = des - src</code></p>
+<pre class="line-numbers language-assembly" data-language="assembly"><code class="language-assembly">sbb src, des<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>利用进位执行大的无符号整数减法操作，进位标志被添加到src值。</p>
+<h6 id="递增和递减"><a href="#递增和递减" class="headerlink" title="递增和递减"></a>递增和递减</h6><p>主要用于无符号整数</p>
+<pre class="line-numbers language-assembly" data-language="assembly"><code class="language-assembly">dec des
+inc des<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h5 id="乘"><a href="#乘" class="headerlink" title="乘"></a>乘</h5><h6 id="无符号"><a href="#无符号" class="headerlink" title="无符号"></a>无符号</h6><pre class="line-numbers language-assembly" data-language="assembly"><code class="language-assembly">mul src<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>默认目标操作数为eax寄存器</p>
+<p>由于乘法可能产生很大的值，所以MUL指令的目标位置必须是源操作数的两倍长度。</p>
+<table>
+<thead>
+<tr>
+<th>源操作数长度</th>
+<th>目标操作数</th>
+<th>目标位置</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>8</td>
+<td>AL</td>
+<td>AX</td>
+</tr>
+<tr>
+<td>16位</td>
+<td>AX</td>
+<td>DX：AX</td>
+</tr>
+<tr>
+<td>32位</td>
+<td>EAX</td>
+<td>EDX：AX</td>
+</tr>
+</tbody></table>
+<h6 id="带符号"><a href="#带符号" class="headerlink" title="带符号"></a>带符号</h6><ul>
+<li>第一种格式:</li>
+</ul>
+<pre class="line-numbers language-assembly" data-language="assembly"><code class="language-assembly">imul src<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>其他规则同mul.</p>
+<ul>
+<li>第二种格式：</li>
+</ul>
+<pre class="line-numbers language-assembly" data-language="assembly"><code class="language-assembly">imul src, des<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>注意溢出。</p>
+<ul>
+<li>第三种格式</li>
+</ul>
+<pre class="line-numbers language-none"><code class="language-none">imul mul, src, des<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>mul - 立即数，src - 寄存器或内存中的值，des - 必须是寄存器。</p>
+<p>运算结果：<code>des = mul * src</code> </p>
+<h5 id="除"><a href="#除" class="headerlink" title="除"></a>除</h5><h6 id="无符号除法"><a href="#无符号除法" class="headerlink" title="无符号除法"></a>无符号除法</h6><pre class="line-numbers language-assembly" data-language="assembly"><code class="language-assembly">div divisor<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>divisor - 除数，被除数位于EAX.商和余数存储在被除数使用的相同寄存器中。</p>
+<table>
+<thead>
+<tr>
+<th>被除数</th>
+<th>被除数长度</th>
+<th>商</th>
+<th>余数</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>AX</td>
+<td>16位</td>
+<td>AL</td>
+<td>AH</td>
+</tr>
+<tr>
+<td>DX：AX</td>
+<td>32位</td>
+<td>AX</td>
+<td>DX</td>
+</tr>
+<tr>
+<td>EDX：EAX</td>
+<td>64位</td>
+<td>EAX</td>
+<td>EDX</td>
+</tr>
+</tbody></table>
+<p>tip：此操作会改变DX或EDX寄存器的值.</p>
+<h6 id="带符号除法"><a href="#带符号除法" class="headerlink" title="带符号除法"></a>带符号除法</h6><pre class="line-numbers language-assembly" data-language="assembly"><code class="language-assembly">idiv divisor<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>规则同上。</p>
+<h5 id="位移"><a href="#位移" class="headerlink" title="位移"></a>位移</h5><ul>
+<li>左移</li>
+</ul>
+<p>SAL - 算术左移， SHL - 逻辑左移。这两个指令执行相同的操作，并且可以互换。格式：</p>
+<pre class="line-numbers language-assembly" data-language="assembly"><code class="language-assembly">sal	des
+sal	%cl, des
+sal shifter, des<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>第一种格式把des的值向左移1位；第二种格式把des的值左移CL寄存器中指定的位数；第三个格式左移shifter值指定的位数。</p>
+<h6 id="右移"><a href="#右移" class="headerlink" title="右移"></a>右移</h6><p>SHR - 用于无符号整数</p>
+<p>SAR - 用于带符号整数</p>
+<p>格式同上。</p>
+<h6 id="循环移位"><a href="#循环移位" class="headerlink" title="循环移位"></a>循环移位</h6><p>溢出的位放回另一端，而不是丢弃。</p>
+<table>
+<thead>
+<tr>
+<th>指令</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ROL</td>
+<td>循环左移</td>
+</tr>
+<tr>
+<td>ROR</td>
+<td>循环右移</td>
+</tr>
+<tr>
+<td>RCL</td>
+<td>循环左移，包含进位标志</td>
+</tr>
+<tr>
+<td>RCR</td>
+<td>循环右移，包含进位标志</td>
+</tr>
+</tbody></table>
+<p>最后两条指令使用进位标志作为附加位的位置，来支持9位移位。</p>
+<p>循环位移指令格式同上。</p>
+<h5 id="十进制运算"><a href="#十进制运算" class="headerlink" title="十进制运算"></a>十进制运算</h5><h5 id="不打包BCD运算"><a href="#不打包BCD运算" class="headerlink" title="不打包BCD运算"></a>不打包BCD运算</h5><p>用于把二进制运算结果转换为不打包BCD格式</p>
+<pre class="line-numbers language-assembly" data-language="assembly"><code class="language-assembly">AAA		&#x2F;&#x2F; 调整加法操作的结果
+AAS		&#x2F;&#x2F; 调整减法操作的结果
+AAM		&#x2F;&#x2F; 调整乘法操作的结果
+AAD		&#x2F;&#x2F; 准备除法操作的被除数<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>这些指令必须和一般的无符号整数指令ADD，ADC，SUB，SBB，MUL，DIV组合在一起使用。AAA，AAS，AAM指令在他们各自的操作之后使用，把二进制结果转换为不打包BCD格式。AAD指令有些不同，在DIV指令之前使用它，用于准备被除数以便生成不打包BCD结果。</p>
+<p>这些指令都使用一个隐含的操作数 – AL寄存器。</p>
+<h5 id="打包BCD运算"><a href="#打包BCD运算" class="headerlink" title="打包BCD运算"></a>打包BCD运算</h5><p>用于把二进制运算结果转换为打包BCD格式</p>
+<pre class="line-numbers language-assembly" data-language="assembly"><code class="language-assembly">DAA		&#x2F;&#x2F; 调整ADD或者ADC指令的结果
+DAS		&#x2F;&#x2F; 调整USB或者SBB指令的结果<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h4 id="逻辑指令"><a href="#逻辑指令" class="headerlink" title="逻辑指令"></a>逻辑指令</h4><h5 id="布尔逻辑"><a href="#布尔逻辑" class="headerlink" title="布尔逻辑"></a>布尔逻辑</h5><p>AND, NOT, OR,XOR</p>
+<p>格式：</p>
+<pre class="line-numbers language-assembly" data-language="assembly"><code class="language-assembly">and  src,des<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>计算结果：<code>des = des &amp; src</code></p>
+<p>使用XOR对寄存器进行清零操作比使用MOV要快。</p>
+<h5 id="位测试"><a href="#位测试" class="headerlink" title="位测试"></a>位测试</h5><p>确定值内的单一位是否被测试为1，比如EFLAGS寄存器的某一位</p>
+<h4 id="MMX指令"><a href="#MMX指令" class="headerlink" title="MMX指令"></a>MMX指令</h4><h5 id="加法-减法指令"><a href="#加法-减法指令" class="headerlink" title="加法/减法指令"></a>加法/减法指令</h5><table>
+<thead>
+<tr>
+<th>MMX指令</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>paddb</td>
+<td>使用环绕的打包字节整数加法</td>
+</tr>
+<tr>
+<td>paddw</td>
+<td>使用环绕的打包字整数加法</td>
+</tr>
+<tr>
+<td>paddd</td>
+<td>使用环绕的打包双字整数加法</td>
+</tr>
+<tr>
+<td>paddsb</td>
+<td>使用带符号饱和的打包字节整数加法</td>
+</tr>
+<tr>
+<td>paddsw</td>
+<td>使用带符号饱和的打包字整数加法</td>
+</tr>
+<tr>
+<td>paddusb</td>
+<td>使用无符号饱和的打包字节整数加法</td>
+</tr>
+<tr>
+<td>paddusw</td>
+<td>使用无符号饱和的打包字整数加法</td>
+</tr>
+<tr>
+<td>psubb</td>
+<td>使用环绕的打包字节整数减法</td>
+</tr>
+<tr>
+<td>psubw</td>
+<td>使用环绕的打包字整数减法</td>
+</tr>
+<tr>
+<td>psybd</td>
+<td>使用环绕的打包双字整数减法</td>
+</tr>
+<tr>
+<td>psubsb</td>
+<td>使用带符号饱和的打包字节整数减法</td>
+</tr>
+<tr>
+<td>psubsw</td>
+<td>使用带符号饱和的打包字整数减法</td>
+</tr>
+<tr>
+<td>psubusb</td>
+<td>使用无符号饱和的打包字节整数减法</td>
+</tr>
+<tr>
+<td>psubusw</td>
+<td>使用无符号饱和的打包字整数减法</td>
+</tr>
+</tbody></table>
+<p>每个MMX数学操作都有相同的格式：</p>
+<pre class="line-numbers language-assembly" data-language="assembly"><code class="language-assembly">paddsb src, des<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>src可以是MMX寄存器或64位内存位置，des是MMX寄存器。运算结果：<code>des = src + des</code></p>
+<h5 id="乘法指令"><a href="#乘法指令" class="headerlink" title="乘法指令"></a>乘法指令</h5><p>带符号整数值乘法：PMULLW，PMULHW</p>
+<p>无符号整数值乘法：PMULLUW，PMULHUW</p>
+<p>附加指令：PMADDWD</p>
+<h5 id="逻辑和位移指令"><a href="#逻辑和位移指令" class="headerlink" title="逻辑和位移指令"></a>逻辑和位移指令</h5><table>
+<thead>
+<tr>
+<th>指令</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>pand</td>
+<td>按位与运算</td>
+</tr>
+<tr>
+<td>pandn</td>
+<td>按位先非后与运算</td>
+</tr>
+<tr>
+<td>por</td>
+<td>按位或运算</td>
+</tr>
+<tr>
+<td>pxor</td>
+<td>按位异或运算</td>
+</tr>
+<tr>
+<td>psll</td>
+<td>逻辑左移，用0填充空位</td>
+</tr>
+<tr>
+<td>psra</td>
+<td>逻辑右移，用0填充空位</td>
+</tr>
+</tbody></table>
+<p>格式：</p>
+<pre class="line-numbers language-assembly" data-language="assembly"><code class="language-assembly">paddsb src, des<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>src可是是MMX寄存器或64位内存位置，des必须是MMX寄存器，左移可以使用字，双字，或四字操作数，还有要位移的位置数量；右移可以使用字或双字操作数，还有要位移的位置数量。</p>
+<h5 id="比较指令-1"><a href="#比较指令-1" class="headerlink" title="比较指令"></a>比较指令</h5><table>
+<thead>
+<tr>
+<th align="left">指令</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">pcmpeqb</td>
+<td>比较打包字节整数值的相等性</td>
+</tr>
+<tr>
+<td align="left">pcmpeqw</td>
+<td>比较打包字整数值的相等性</td>
+</tr>
+<tr>
+<td align="left">pcmpeqd</td>
+<td>比较打包双字整数值的相等性</td>
+</tr>
+<tr>
+<td align="left">pcmpgtb</td>
+<td>判断打包字节整数值是否大于另一个</td>
+</tr>
+<tr>
+<td align="left">pcmpgtw</td>
+<td>判断打包字整数值是否大于另一个</td>
+</tr>
+<tr>
+<td align="left">pcmpgtd</td>
+<td>判断打包双字整数值是否大于另一个</td>
+</tr>
+</tbody></table>
+<h4 id="SSE指令"><a href="#SSE指令" class="headerlink" title="SSE指令"></a>SSE指令</h4><h5 id="传送数据"><a href="#传送数据" class="headerlink" title="传送数据"></a>传送数据</h5><table>
+<thead>
+<tr>
+<th>指令</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>movaps</td>
+<td>把4个对准的单精度值传送到XMM寄存器或者内存</td>
+</tr>
+<tr>
+<td>movups</td>
+<td>把4个不对准的单精度值传送到XMM寄存器或者内存</td>
+</tr>
+<tr>
+<td>movss</td>
+<td>把1个单精度值传送到XMM寄存器或者内存的低位双字</td>
+</tr>
+<tr>
+<td>movlps</td>
+<td>把2个单精度值传送到XMM寄存器或者内存的低四字</td>
+</tr>
+<tr>
+<td>movhps</td>
+<td>把2个单精度值传送到XMM寄存器或者内存的高双字</td>
+</tr>
+<tr>
+<td>movlhps</td>
+<td>把2个单精度值从低四字传送到高四字</td>
+</tr>
+<tr>
+<td>movhlps</td>
+<td>把2个单精度值从高四字传送到低四字</td>
+</tr>
+</tbody></table>
+<h5 id="处理数据"><a href="#处理数据" class="headerlink" title="处理数据"></a>处理数据</h5><h6 id="运算指令"><a href="#运算指令" class="headerlink" title="运算指令"></a>运算指令</h6><table>
+<thead>
+<tr>
+<th>指令</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>addps</td>
+<td>将两个打包值相加</td>
+</tr>
+<tr>
+<td>subps</td>
+<td>将两个打包值相减</td>
+</tr>
+<tr>
+<td>mulps</td>
+<td>将两个打包值相乘</td>
+</tr>
+<tr>
+<td>divps</td>
+<td>将两个打包值相除</td>
+</tr>
+<tr>
+<td>rcpps</td>
+<td>计算打包值的倒数</td>
+</tr>
+<tr>
+<td>sqrtps</td>
+<td>计算打包值的平方根</td>
+</tr>
+<tr>
+<td>rsqrtps</td>
+<td>计算打包值的平方根倒数</td>
+</tr>
+<tr>
+<td>maxps</td>
+<td>计算两个打包值中的最大值</td>
+</tr>
+<tr>
+<td>minps</td>
+<td>计算两个打包值中的最小值</td>
+</tr>
+<tr>
+<td>andps</td>
+<td>计算两个打包值的按位逻辑与</td>
+</tr>
+<tr>
+<td>andnps</td>
+<td>计算两个打包值的按位逻辑与非</td>
+</tr>
+<tr>
+<td>orps</td>
+<td>计算两个打包值的按位逻辑或</td>
+</tr>
+<tr>
+<td>xorps</td>
+<td>计算两个打包值的按位异或</td>
+</tr>
+</tbody></table>
+<p>这些指令都使用两个操作数，源操作数可以是128位内存或XMM寄存器。目标寄存器必须是寄存器，结果保存在XMM0。</p>
+<h6 id="比较指令-2"><a href="#比较指令-2" class="headerlink" title="比较指令"></a>比较指令</h6><table>
+<thead>
+<tr>
+<th>指令</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>cmpps</td>
+<td>比较打包值</td>
+</tr>
+<tr>
+<td>cmpss</td>
+<td>比较标量值</td>
+</tr>
+<tr>
+<td>comiss</td>
+<td>比较标量值并且设置EFLAGS寄存器</td>
+</tr>
+<tr>
+<td>ucomiss</td>
+<td>比较标量值（包括非法值）并且设置EFLAGS寄存器</td>
+</tr>
+</tbody></table>
+<pre class="line-numbers language-assembly" data-language="assembly"><code class="language-assembly">smpps  imp, src, des<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>des必须是XMM寄存器，src可以是128位内存位置或XMM寄存器，imp是一个无符号整数值，它确定将指令执行什么类型的比较。</p>
+<table>
+<thead>
+<tr>
+<th>执行值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0</td>
+<td>等于</td>
+</tr>
+<tr>
+<td>1</td>
+<td>小于</td>
+</tr>
+<tr>
+<td>2</td>
+<td>小于或等于</td>
+</tr>
+<tr>
+<td>3</td>
+<td>无序</td>
+</tr>
+<tr>
+<td>4</td>
+<td>不等于</td>
+</tr>
+<tr>
+<td>5</td>
+<td>不小于</td>
+</tr>
+<tr>
+<td>6</td>
+<td>不小于或等于</td>
+</tr>
+<tr>
+<td>7</td>
+<td>有序</td>
+</tr>
+</tbody></table>
+<p>比较结果为真时，XMM0中是位掩码（全1为真，全0为假）。</p>
+<h5 id="整数指令"><a href="#整数指令" class="headerlink" title="整数指令"></a>整数指令</h5><table>
+<thead>
+<tr>
+<th>指令</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>pavgb</td>
+<td>计算打包无符号字节整数的平均值</td>
+</tr>
+<tr>
+<td>pavgw</td>
+<td>计算打包无符号字整数的平均值</td>
+</tr>
+<tr>
+<td>pextrw</td>
+<td>把一个字从MMX寄存器复制到通用寄存器</td>
+</tr>
+<tr>
+<td>pinsrw</td>
+<td>把一个字从通用寄存器复制到MMX寄存器</td>
+</tr>
+<tr>
+<td>pmaxub</td>
+<td>计算打包无符号字节整数的最大值</td>
+</tr>
+<tr>
+<td>pmaxsw</td>
+<td>计算打包带符号字整数的最大值</td>
+</tr>
+<tr>
+<td>pminub</td>
+<td>计算打包无符号字节整数的最小值</td>
+</tr>
+<tr>
+<td>pminsw</td>
+<td>计算打包带符号字整数的最小值</td>
+</tr>
+<tr>
+<td>pmulhuw</td>
+<td>将打包无符号字整数相乘并且存储高位结果</td>
+</tr>
+<tr>
+<td>psadbw</td>
+<td>计算无符号字节整数的绝对差的总和</td>
+</tr>
+</tbody></table>
+<h4 id="SSE2指令"><a href="#SSE2指令" class="headerlink" title="SSE2指令"></a>SSE2指令</h4><h5 id="传送数据-1"><a href="#传送数据-1" class="headerlink" title="传送数据"></a>传送数据</h5><table>
+<thead>
+<tr>
+<th>指令</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>movapd</td>
+<td>把2个对准的双精度值传送到XMM寄存器或内存</td>
+</tr>
+<tr>
+<td>movupd</td>
+<td>把2个不对准的双精度值传送到XMM寄存器或内存</td>
+</tr>
+<tr>
+<td>movdqa</td>
+<td>把2个对准的四字整数值传送到XMM寄存器或内存</td>
+</tr>
+<tr>
+<td>movdqu</td>
+<td>把2个不对准的四字整数值传送到XMM寄存器或内存</td>
+</tr>
+<tr>
+<td>movsd</td>
+<td>把1个双精度值传送到XMM寄存器或内存的低位四字</td>
+</tr>
+<tr>
+<td>movhpd</td>
+<td>把1个双精度值传送到XMM寄存器或内存的高位四字</td>
+</tr>
+<tr>
+<td>movlpd</td>
+<td>把1个双精度值传送到XMM寄存器或内存的低位四字</td>
+</tr>
+</tbody></table>
+<pre class="line-numbers language-assembly" data-language="assembly"><code class="language-assembly">movapd  packedvalued, %xmm0<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h5 id="处理数据-1"><a href="#处理数据-1" class="headerlink" title="处理数据"></a>处理数据</h5><table>
+<thead>
+<tr>
+<th>指令</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>addpd</td>
+<td>将打包双精度浮点值相加</td>
+</tr>
+<tr>
+<td>addsd</td>
+<td>将标量双精度浮点值相加</td>
+</tr>
+<tr>
+<td>paddsb</td>
+<td>将打包带符号字节整数值相加</td>
+</tr>
+<tr>
+<td>paddsw</td>
+<td>将打包带符号字整数值相加</td>
+</tr>
+<tr>
+<td>paddd</td>
+<td>将打包双字整数值相加</td>
+</tr>
+<tr>
+<td>paddq</td>
+<td>将打包四字整数值相加</td>
+</tr>
+</tbody></table>
+<p>这些选项也存在与乘法和除法中（MULPD，MULSD，DIVPD，DIVSD等），和SSE一样。SSE2也提供专门的数学操作：SQRT，MAX，MIN。</p>
+<h4 id="SSE3指令"><a href="#SSE3指令" class="headerlink" title="SSE3指令"></a>SSE3指令</h4><table>
+<thead>
+<tr>
+<th>指令</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>fisttp</td>
+<td>把1个FPU寄存器的值转换为整数（使用舍入）并且从FPU堆栈中弹出</td>
+</tr>
+<tr>
+<td>lddqu</td>
+<td>快速地从内存加载128位不对准的数据</td>
+</tr>
+<tr>
+<td>movshdup</td>
+<td>传送128位值，复制第2个和第4个32位数据元素</td>
+</tr>
+<tr>
+<td>movsldup</td>
+<td>传送128位值，复制第1个和第4个32位数据元素</td>
+</tr>
+<tr>
+<td>movddup</td>
+<td>传送64位值，复制值，使之称为128位</td>
+</tr>
+<tr>
+<td>addsubps</td>
+<td>对一个打包单精度浮点值的第2和第4个32位值做加法，对第1和第3个32位值做减法</td>
+</tr>
+<tr>
+<td>addsubpd</td>
+<td>对1个打包双精度浮点值，对第一对64位值执行减法，对第2对执行加法。</td>
+</tr>
+<tr>
+<td>haddps</td>
+<td>对操作数的相邻的数据元素执行单精度浮点加法操作</td>
+</tr>
+<tr>
+<td>haddpd</td>
+<td>对操作数的相邻的数据元素执行双精度浮点加法操作</td>
+</tr>
+<tr>
+<td>hsubps</td>
+<td>对操作数的相邻的数据元素执行单精度浮点减法操作</td>
+</tr>
+<tr>
+<td>hsubpd</td>
+<td>对操作数的相邻的数据元素执行双精度浮点减法操作</td>
+</tr>
+</tbody></table>
+<h4 id="其他指令"><a href="#其他指令" class="headerlink" title="其他指令"></a>其他指令</h4><table>
+<thead>
+<tr>
+<th>指令</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>PUSH src</td>
+<td>将src的值压入栈</td>
+</tr>
+<tr>
+<td>POP dest</td>
+<td>将位于栈顶部的数据弹出到dest</td>
+</tr>
+<tr>
+<td>CALL addr</td>
+<td>在addr处调用函数</td>
+</tr>
+<tr>
+<td>LEAVE</td>
+<td>在退出函数之前清除栈帧 =（mov esp,ebp ； pop ebp）</td>
+</tr>
+<tr>
+<td>RET</td>
+<td>从函数返回</td>
+</tr>
+<tr>
+<td>INT num</td>
+<td>软件中断访问操作系统函数</td>
+</tr>
+<tr>
+<td>NOP</td>
+<td>不操作或不执行任何命令</td>
+</tr>
+</tbody></table>
+<h5 id="cpuid指令"><a href="#cpuid指令" class="headerlink" title="cpuid指令"></a>cpuid指令</h5><table>
+<thead>
+<tr>
+<th>EAX值</th>
+<th>CPUID输出</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0</td>
+<td>厂商ID字符串和支持的最大CPUID选项值</td>
+</tr>
+<tr>
+<td>1</td>
+<td>处理器类型，系列，型号和分步信息</td>
+</tr>
+<tr>
+<td>2</td>
+<td>处理器缓存配置</td>
+</tr>
+<tr>
+<td>3</td>
+<td>处理器序列号</td>
+</tr>
+<tr>
+<td>4</td>
+<td>缓存配置</td>
+</tr>
+<tr>
+<td>5</td>
+<td>监视信息</td>
+</tr>
+<tr>
+<td>80000000h</td>
+<td>拓展的厂商ID字符串和支持的级别</td>
+</tr>
+<tr>
+<td>80000001h</td>
+<td>拓展的处理器类型，系列，型号和分步信息</td>
+</tr>
+<tr>
+<td>80000002h-4h</td>
+<td>拓展的处理器名称字符串</td>
+</tr>
+</tbody></table>
+<p>处理器把厂商ID返回到EBX,EDX和ECX寄存器中。</p>
+<hr>
+<h3 id="1-12-预置浮点值指令"><a href="#1-12-预置浮点值指令" class="headerlink" title="1.12 预置浮点值指令"></a>1.12 预置浮点值指令</h3><table>
+<thead>
+<tr>
+<th>指令</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>FLD1</td>
+<td>把+1.0压入FPU堆栈中</td>
+</tr>
+<tr>
+<td>FLDL2T</td>
+<td>把10的对数（底数2）压入FPU堆栈中</td>
+</tr>
+<tr>
+<td>FLDL2E</td>
+<td>把e的对数（底数2）压入FPU堆栈中</td>
+</tr>
+<tr>
+<td>FLDPI</td>
+<td>把pi的值压入堆栈中</td>
+</tr>
+<tr>
+<td>FLDLG2</td>
+<td>把2的对数（底数10）压入FPU堆栈中</td>
+</tr>
+<tr>
+<td>FLDLN2</td>
+<td>把2的对数（底数e）压入FPU堆栈中</td>
+</tr>
+<tr>
+<td>FLDZ</td>
+<td>把+0.0压入堆栈中</td>
+</tr>
+</tbody></table>
+<p>在浮点数据类型中，+0.0 和 -0.0是有区别的。对于大多数操作，他们被认为是相同的值，但是在除法中，一个产生正无穷大，一个产生负无穷大。</p>
+<hr>
+<h2 id="2-FPU环境"><a href="#2-FPU环境" class="headerlink" title="2. FPU环境"></a>2. FPU环境</h2><p>FPU是一个自持的单元，有一组与标准处理器寄存器分离的一组寄存器处理浮点操作。</p>
+<p>附加的寄存器包括8个80位数据寄存器和3个16位寄存器，称为控制，状态，和标记寄存器。    </p>
+<p>控制字：控制FPU如何操作</p>
+<p>状态字：表明FPU中发生了什么</p>
+<p>标记字：定义FPU寄存器堆栈中包含的值</p>
+<h3 id="2-1-状态寄存器"><a href="#2-1-状态寄存器" class="headerlink" title="2.1 状态寄存器"></a>2.1 状态寄存器</h3><p>用于确定FPU的状态</p>
+<table>
+<thead>
+<tr>
+<th>状态位</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0</td>
+<td>非法操作异常标志</td>
+</tr>
+<tr>
+<td>1</td>
+<td>非规格化操作数异常标志</td>
+</tr>
+<tr>
+<td>2</td>
+<td>除数为零异常标志</td>
+</tr>
+<tr>
+<td>3</td>
+<td>溢出异常标志</td>
+</tr>
+<tr>
+<td>4</td>
+<td>下溢溢出标志</td>
+</tr>
+<tr>
+<td>5</td>
+<td>精度异常标志</td>
+</tr>
+<tr>
+<td>6</td>
+<td>堆栈错误</td>
+</tr>
+<tr>
+<td>7</td>
+<td>错误汇总状态</td>
+</tr>
+<tr>
+<td>8</td>
+<td>条件代码位0（C0）</td>
+</tr>
+<tr>
+<td>9</td>
+<td>条件代码位1（C1）</td>
+</tr>
+<tr>
+<td>10</td>
+<td>条件代码位2（C2）</td>
+</tr>
+<tr>
+<td>11 - 13</td>
+<td>堆栈顶部指针</td>
+</tr>
+<tr>
+<td>14</td>
+<td>条件代码位3（C3）</td>
+</tr>
+<tr>
+<td>15</td>
+<td>FPU繁忙状态</td>
+</tr>
+</tbody></table>
+<p>读取状态寄存器到AX寄存器或一个双字内存位置：</p>
+<pre class="line-numbers language-assembly" data-language="assembly"><code class="language-assembly">.section .bss
+	.lcomm status, 2
+
+fstsw	%ax
+fstsw	status<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="2-2-控制寄存器"><a href="#2-2-控制寄存器" class="headerlink" title="2.2 控制寄存器"></a>2.2 控制寄存器</h3><p>控制FPU内的浮点功能。</p>
+<table>
+<thead>
+<tr>
+<th>控制位</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0</td>
+<td>非法操作异常掩码</td>
+</tr>
+<tr>
+<td>1</td>
+<td>非规格化操作数异常掩码</td>
+</tr>
+<tr>
+<td>2</td>
+<td>除数为零异常掩码</td>
+</tr>
+<tr>
+<td>3</td>
+<td>溢出异常掩码</td>
+</tr>
+<tr>
+<td>4</td>
+<td>精度异常掩码</td>
+</tr>
+<tr>
+<td>5</td>
+<td>下溢异常掩码</td>
+</tr>
+<tr>
+<td>6-7</td>
+<td>保留</td>
+</tr>
+<tr>
+<td>8-9</td>
+<td>精度控制</td>
+</tr>
+<tr>
+<td>10-11</td>
+<td>舍入控制</td>
+</tr>
+<tr>
+<td>12</td>
+<td>无穷大控制</td>
+</tr>
+<tr>
+<td>13-15</td>
+<td>保留</td>
+</tr>
+</tbody></table>
+<p>控制寄存器的前六位用于控制使用状态寄存器中的哪些异常标志，当这些位中的一位被设置的时候，就会防止状态寄存器中对应的异常标志被设置，默认情况下，所有掩码位都被设置，即屏蔽所有异常。</p>
+<p>控制寄存器的默认值是0x037F，使用<code>FSTCW</code>可以把控制寄存器的设置加载到双字内存位置中查看设置的内容。也可以使用FLDCW指令改变设置。</p>
+<pre class="line-numbers language-assembly" data-language="assembly"><code class="language-assembly">.section .bss
+.lcomm control, 2
+
+fstcw	control
+fldcw	newvalue<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="2-3-标记寄存器"><a href="#2-3-标记寄存器" class="headerlink" title="2.3 标记寄存器"></a>2.3 标记寄存器</h3><p>标记寄存器用于标识8个80位FPU数据寄存器中的值，标记寄存器使用16位（每个寄存器两位）标识每个FPU数据寄存器的内容。</p>
+<table>
+    <tr>
+        <td colspan="4">15</td>
+        <td colspan="4" align="right">0</td>
+    </tr>
+    <tr>
+        <td>R7</td>
+        <td>R6</td>
+        <td>R5</td>
+        <td>R4</td>
+        <td>R3</td>
+        <td>R2</td>
+        <td>R1</td>
+        <td>R0</td>
+    </tr>
+</table>
+
+<p>每个寄存器对应一个物理的FPU寄存器。每个寄存器对应的2位值可以包含表明寄存器内容的4个特殊吗之一。在任何给定的时刻，FPU数据寄存器可以包含下面的内容：</p>
+<ul>
+<li>一个合法的拓展双精度值（00）</li>
+<li>零值（01）</li>
+<li>特殊的浮点值（10）</li>
+<li>无内容（11）</li>
+</ul>
+<h3 id="2-4-寄存器操作指令"><a href="#2-4-寄存器操作指令" class="headerlink" title="2.4 寄存器操作指令"></a>2.4 寄存器操作指令</h3><p>后跟长度指示符（sb表示单精度，l表示双精度）</p>
+<table>
+<thead>
+<tr>
+<th>指令</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>finit</td>
+<td>初始化FPU，把控制寄存器和状态寄存器都设为默认值</td>
+</tr>
+<tr>
+<td>fstcw   des</td>
+<td>将控制寄存器的值复制到des</td>
+</tr>
+<tr>
+<td>fstsw   des</td>
+<td>将状态寄存器的值复制到des</td>
+</tr>
+<tr>
+<td>filds   src</td>
+<td>将双字整数src加载到FPU寄存器堆栈中。</td>
+</tr>
+<tr>
+<td>fists   des</td>
+<td>获取寄存器栈顶的值，保存到des</td>
+</tr>
+<tr>
+<td>flds   src</td>
+<td>将单精度浮点值加载到FPU寄存器</td>
+</tr>
+<tr>
+<td>fldl   src</td>
+<td>将双精度浮点值加载到FPU寄存器</td>
+</tr>
+<tr>
+<td>fst   des</td>
+<td>将数据从ST0复制到内存位置或另一个FPU寄存器</td>
+</tr>
+<tr>
+<td>fxxh   des</td>
+<td>交换ST0和另一个FPU寄存器的值（des）</td>
+</tr>
+<tr>
+<td>fstp</td>
+<td>将数据从ST0弹出到内存位置</td>
+</tr>
+</tbody></table>
+<h3 id="2-5-浮点运算指令"><a href="#2-5-浮点运算指令" class="headerlink" title="2.5 浮点运算指令"></a>2.5 浮点运算指令</h3><table>
+<thead>
+<tr>
+<th>指令</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>fadd</td>
+<td>浮点加法</td>
+</tr>
+<tr>
+<td>fdiv</td>
+<td>浮点减法</td>
+</tr>
+<tr>
+<td>fdivr</td>
+<td>反向浮点减法</td>
+</tr>
+<tr>
+<td>fmul</td>
+<td>浮点乘法</td>
+</tr>
+<tr>
+<td>fsub</td>
+<td>浮点减法</td>
+</tr>
+<tr>
+<td>fsubr</td>
+<td>反向浮点减法</td>
+</tr>
+</tbody></table>
+<pre class="line-numbers language-assembly" data-language="assembly"><code class="language-assembly">fadd  	src &#x2F;&#x2F; 内存中的32位或64位值和ST0寄存器相加，结果存到ST0
+fadd	%st(x), %st(0) &#x2F;&#x2F; st(x)和st(0)相加，结果保存到st(0)
+faddp   %st(0), %st(x) &#x2F;&#x2F; st(0)和st(x)相加，结果保存到st(x),并弹出st(0)
+faddp 	&#x2F;&#x2F; st(0)和st(1)相加，结果保存到st(1),并弹出st(0)
+fiadd	src  &#x2F;&#x2F; 16位或32位整数值和ST0寄存器相加，结果存到ST0<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>其他的指令都有类似的格式。</p>
+<h3 id="2-6-高级浮点指令"><a href="#2-6-高级浮点指令" class="headerlink" title="2.6 高级浮点指令"></a>2.6 高级浮点指令</h3><table>
+<thead>
+<tr>
+<th>指令</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>fabs</td>
+<td>计算ST0的绝对值</td>
+</tr>
+<tr>
+<td>fchs</td>
+<td>改变ST0的符号</td>
+</tr>
+<tr>
+<td>fcos</td>
+<td>计算ST0的余弦</td>
+</tr>
+<tr>
+<td>fsin</td>
+<td>计算ST0的正弦</td>
+</tr>
+<tr>
+<td>fsincos</td>
+<td>计算ST0的正弦和余弦（余弦值位于ST0，正弦值位于ST1）</td>
+</tr>
+<tr>
+<td>fptan</td>
+<td>计算ST0的部分正切</td>
+</tr>
+<tr>
+<td>fpatan</td>
+<td>计算ST0的部分反正切</td>
+</tr>
+<tr>
+<td>fprem</td>
+<td>计算ST0除以ST1的部分余数(向零舍入)</td>
+</tr>
+<tr>
+<td>fprem1</td>
+<td>计算ST0除以ST1的IEEE部分余数（向上舍入）</td>
+</tr>
+<tr>
+<td>frndint</td>
+<td>把ST0舍入到最近的整数</td>
+</tr>
+<tr>
+<td>fscale</td>
+<td>计算ST0乘以2的ST1次乘方</td>
+</tr>
+<tr>
+<td>f2xm1</td>
+<td>计算2的乘方（次数为ST0中的值）减1</td>
+</tr>
+<tr>
+<td>fsqrt</td>
+<td>计算ST0的平方根</td>
+</tr>
+<tr>
+<td>fyl2x</td>
+<td>计算  $ST1*log_2ST0$</td>
+</tr>
+<tr>
+<td>fyl2xp1</td>
+<td>计算  $ST1*log_2(ST0+1)$</td>
+</tr>
+</tbody></table>
+<p>以上所有计算三角函数的指令全都使用弧度作为源操作数的单位。计算结果存放到ST0寄存器。</p>
+<h3 id="2-7-浮点条件分支"><a href="#2-7-浮点条件分支" class="headerlink" title="2.7 浮点条件分支"></a>2.7 浮点条件分支</h3><h4 id="fcom系列指令"><a href="#fcom系列指令" class="headerlink" title="fcom系列指令"></a>fcom系列指令</h4><p>用于在FPU中比较两个浮点值。</p>
+<table>
+<thead>
+<tr>
+<th>指令</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>fcom</td>
+<td>比较ST0寄存器和ST1寄存器</td>
+</tr>
+<tr>
+<td>fcom  ST(x)</td>
+<td>比较ST0和另一个FPU寄存器</td>
+</tr>
+<tr>
+<td>fcom  src</td>
+<td>比较ST0和32或64位内存值</td>
+</tr>
+<tr>
+<td>fcomp</td>
+<td>比较ST0和ST1寄存器，并弹出堆栈</td>
+</tr>
+<tr>
+<td>fcomp  ST(x)</td>
+<td>比较ST0和另一个FPU寄存器寄存器，并弹出堆栈</td>
+</tr>
+<tr>
+<td>fcomp  src</td>
+<td>比较ST0和32或64位内存值，并弹出堆栈</td>
+</tr>
+<tr>
+<td>fcompp</td>
+<td>比较ST0和ST1寄存器，并两次弹出堆栈</td>
+</tr>
+<tr>
+<td>ftst</td>
+<td>比较ST0和值0.0</td>
+</tr>
+</tbody></table>
+<p>比较的结果设置在状态寄存器的C0，C2， C3条件代码位中，比较可能产生的值：</p>
+<table>
+<thead>
+<tr>
+<th align="center">条件</th>
+<th align="center">C3</th>
+<th align="center">C2</th>
+<th align="center">C0</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">ST0 &gt; src</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+</tr>
+<tr>
+<td align="center">ST0 &lt; src</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">1</td>
+</tr>
+<tr>
+<td align="center">ST0 = src</td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">0</td>
+</tr>
+</tbody></table>
+<h4 id="fcomi系列指令"><a href="#fcomi系列指令" class="headerlink" title="fcomi系列指令"></a>fcomi系列指令</h4><p>执行浮点比较并把结果存放到EFLAGS寄存器中的进位，奇偶校验和零标志。</p>
+<table>
+<thead>
+<tr>
+<th>指令</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>fcomi   ST(x)</td>
+<td>比较ST0和ST(x)寄存器</td>
+</tr>
+<tr>
+<td>fcomi  ST(x)</td>
+<td>比较ST0和ST(x)寄存器,并弹出堆栈</td>
+</tr>
+<tr>
+<td>fucomi</td>
+<td>在比较之间检查无序值</td>
+</tr>
+<tr>
+<td>fucomip</td>
+<td>在比较之间检查无序值，并在比较之后弹出堆栈。</td>
+</tr>
+</tbody></table>
+<p>fcomi系列指令只能比较FPU寄存器中的两个值，不能比较FPU寄存器和内存中的值。</p>
+<p>fcomi指令的输出使用ELFAGS寄存器:</p>
+<table>
+<thead>
+<tr>
+<th align="center">条件</th>
+<th align="center">ZF</th>
+<th align="center">PF</th>
+<th align="center">CF</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">ST0 &gt; ST(x)</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+</tr>
+<tr>
+<td align="center">ST0 &lt; ST(x)</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">1</td>
+</tr>
+<tr>
+<td align="center">ST0 = ST(x)</td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">0</td>
+</tr>
+</tbody></table>
+<h4 id="fcmov指令系列"><a href="#fcmov指令系列" class="headerlink" title="fcmov指令系列"></a>fcmov指令系列</h4><p>类似整数的CMOV指令。根据EFLGS寄存器的值，FCOMV系列的指令（如果条件为true）把FPU寄存器ST(x)中的源操作数产生到ST(0)。</p>
+<table>
+<thead>
+<tr>
+<th>指令</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>fcmovb</td>
+<td>如果ST(0)小于ST(x),则进行传送。</td>
+</tr>
+<tr>
+<td>fcmove</td>
+<td>如果ST(0)等于ST(x),则进行传送。</td>
+</tr>
+<tr>
+<td>fcmovbe</td>
+<td>如果ST(0)小于等于ST(x),则进行传送。</td>
+</tr>
+<tr>
+<td>fcmovu</td>
+<td>如果ST(0)无序,则进行传送。</td>
+</tr>
+<tr>
+<td>fcmovnb</td>
+<td>如果ST(0)不小于ST(x),则进行传送。</td>
+</tr>
+<tr>
+<td>fcmovne</td>
+<td>如果ST(0)不等于ST(x),则进行传送。</td>
+</tr>
+<tr>
+<td>fcmovnbe</td>
+<td>如果ST(0)不小于或等于ST(x),则进行传送。</td>
+</tr>
+<tr>
+<td>fcmovnu</td>
+<td>如果ST(0)非无序,则进行传送。</td>
+</tr>
+</tbody></table>
+<p>指令的格式：</p>
+<pre class="line-numbers language-assembly" data-language="assembly"><code class="language-assembly">fcmovxx src,des<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>其中，src是ST(x)寄存器，des是ST(0)寄存器。</p>
+<h3 id="2-8-保存和恢复FPU状态"><a href="#2-8-保存和恢复FPU状态" class="headerlink" title="2.8 保存和恢复FPU状态"></a>2.8 保存和恢复FPU状态</h3><p>现在的处理器使用FPU数据寄存器完成双重工作，MMX技术使用FPU寄存器作为MMX数据寄存器，存储80位打包整数值用于计算，如果在同一个程序中使用FPU和MMX功能，就有可能破坏数据寄存器。</p>
+<p>FSTENV指令用于把FPU环境存储到一个28字节的内存块中。</p>
+<p>FLDENV指令用于把内存块的值加载回FPU环境中。</p>
+<p>小面的FPU寄存器被保存：</p>
+<ul>
+<li>控制寄存器</li>
+<li>状态寄存器</li>
+<li>标记寄存器</li>
+<li>FPU指令寄存器</li>
+<li>FPU数据指针</li>
+<li>FPU最后执行的操作码</li>
+</ul>
+<p>上述的两个命令没有保存数据，为此：</p>
+<p>FSAVE指令把所有FPU寄存器复制到一个108字节的内存地址，</p>
+<p>FRSTOR指令恢复FPU到执行FSAVE指令是时的状态。</p>
+<p>FXSAVE和FXRSTOR指令保存FPU，MMX和SSE状态。</p>
+<p>MMX操作完成时，应该使用EMMS指令清除FPU的标记寄存器，以确保FPU指令正确地执行。</p>
+<h3 id="2-9-和非等待指令"><a href="#2-9-和非等待指令" class="headerlink" title="2.9 和非等待指令"></a>2.9 和非等待指令</h3><p>大多数浮点指令在执行之前必须等待以便确保前面的指令没有抛出异常，如果出现异常，在执行下一条指令之前必须先处理异常。</p>
+<p>一些指令包含非等待版本，他们不等待浮点异常的检查。这些指令允许程序保存或者复位当前的FPU状态，而不处理任何悬而未决的异常。</p>
+<table>
+<thead>
+<tr>
+<th>指令</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>fnclex</td>
+<td>清空浮点异常标志</td>
+</tr>
+<tr>
+<td>fnsave</td>
+<td>把FPU状态保存到内存</td>
+</tr>
+<tr>
+<td>fnstcw</td>
+<td>保存FPU控制寄存器</td>
+</tr>
+<tr>
+<td>fnstenv</td>
+<td>把FPU操作环境保存到内存中</td>
+</tr>
+<tr>
+<td>fnstsw</td>
+<td>把FPU状态寄存器保存到内存或AX寄存器中</td>
+</tr>
+</tbody></table>
+<h3 id="2-10-优化浮点运算"><a href="#2-10-优化浮点运算" class="headerlink" title="2.10 优化浮点运算"></a>2.10 优化浮点运算</h3><ul>
+<li>确保浮点值不会上溢或下溢出数据元素</li>
+<li>把精度控制位设置为单精度</li>
+<li>使用查找表实现简单的三角函数</li>
+<li>在可能的情况下，断开依赖连。例如，不计算y =a+b+c+d ,而是计算 x = a+b,y=c+d,z = x+y</li>
+<li>在FPU寄存器中尽可能多地保留方程式的值。</li>
+<li>在处理整数和浮点值时，把整数加载到FPU寄存器中并且执行运算，这样比对整数使用浮点指令要快。例如，不适用FIDIV，而是使用FILD加载整数，然后对FPU寄存器的值执行FDIVP指令。</li>
+<li>尽可能使用FCOMI指令，而不使用FCOM指令。</li>
+</ul>
+<hr>
+<h2 id="3-字符串处理"><a href="#3-字符串处理" class="headerlink" title="3. 字符串处理"></a>3. 字符串处理</h2><p>字符串指令也可以应用于非字符串数据。传送，修改和比较数字数据块的操作也可以通过IA-32字符串指令来完成。</p>
+<h3 id="3-1-传送字符串"><a href="#3-1-传送字符串" class="headerlink" title="3.1 传送字符串"></a>3.1 传送字符串</h3><h4 id="MOVS指令"><a href="#MOVS指令" class="headerlink" title="MOVS指令"></a>MOVS指令</h4><p>可以把字符串从一个内存位置传送到另一个内存位置（MOV不能）。</p>
+<table>
+<thead>
+<tr>
+<th>指令</th>
+<th>格式</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>movsb</td>
+<td>传送一个字节</td>
+</tr>
+<tr>
+<td>movsw</td>
+<td>传送一个字（2字节）</td>
+</tr>
+<tr>
+<td>movsl</td>
+<td>传送一个双字（4字节）</td>
+</tr>
+</tbody></table>
+<p>Intel文档使用MOVSD传送双字，GUN汇编器决定使用movsl</p>
+<p>格式：</p>
+<pre class="line-numbers language-assembly" data-language="assembly"><code class="language-assembly">movsl<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>指令使用隐含源ESI寄存器，目标EDI寄存器。</p>
+<h4 id="rep前缀"><a href="#rep前缀" class="headerlink" title="rep前缀"></a>rep前缀</h4><p>rep指令用于按照特定次数重复执行字符串指令，有ECX寄存器中的值进行控制。和循环类似，但是不需要额外的loop指令。</p>
+<pre class="line-numbers language-assembly" data-language="assembly"><code class="language-assembly">rep movsb<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>根据零标志（ZF）状态执行的REP指令</p>
+<table>
+<thead>
+<tr>
+<th>指令</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>repe</td>
+<td>等于时重复</td>
+</tr>
+<tr>
+<td>repne</td>
+<td>不等于时重复</td>
+</tr>
+<tr>
+<td>repnz</td>
+<td>不为零时重复</td>
+</tr>
+<tr>
+<td>repz</td>
+<td>为零时重复</td>
+</tr>
+</tbody></table>
+<h3 id="3-2-存储和加载字符串"><a href="#3-2-存储和加载字符串" class="headerlink" title="3.2 存储和加载字符串"></a>3.2 存储和加载字符串</h3><h4 id="lods指令"><a href="#lods指令" class="headerlink" title="lods指令"></a>lods指令</h4><p>用于把内存中的字符串值传送到EAX寄存器中。</p>
+<table>
+<thead>
+<tr>
+<th>指令</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>lodsb</td>
+<td>把一个字节加载到AL寄存器</td>
+</tr>
+<tr>
+<td>lodsw</td>
+<td>把一个字加载到AX寄存器</td>
+</tr>
+<tr>
+<td>lodsl</td>
+<td>把一个双字加载到EAX寄存器</td>
+</tr>
+</tbody></table>
+<p>lods使用ESI寄存器作为隐含的源操作数。ESI寄存器必须包含要加载的字符串所在的内存地址。</p>
+<h4 id="stos指令"><a href="#stos指令" class="headerlink" title="stos指令"></a>stos指令</h4><p>用于把字符串存放到内存位置中</p>
+<table>
+<thead>
+<tr>
+<th>指令</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>stosb</td>
+<td>存储AL寄存器中的一个字节的数据</td>
+</tr>
+<tr>
+<td>stosw</td>
+<td>存储AL寄存器中的一个字的数据</td>
+</tr>
+<tr>
+<td>stosl</td>
+<td>存储AL寄存器中的一个双字的数据</td>
+</tr>
+</tbody></table>
+<h3 id="3-3-比较字符串"><a href="#3-3-比较字符串" class="headerlink" title="3.3 比较字符串"></a>3.3 比较字符串</h3><h4 id="cmps指令"><a href="#cmps指令" class="headerlink" title="cmps指令"></a>cmps指令</h4><table>
+<thead>
+<tr>
+<th>指令</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>cmpsb</td>
+<td>比较字节值</td>
+</tr>
+<tr>
+<td>cmpsw</td>
+<td>比较字值</td>
+</tr>
+<tr>
+<td>cmpsl</td>
+<td>比较双字值</td>
+</tr>
+</tbody></table>
+<p>隐含的源和目标操作数是ESI个EDI寄存器。cmps指令从源字符串减去目标字符串，并适当地设置EFLAGS寄存器。</p>
+<h3 id="3-4-扫描字符串"><a href="#3-4-扫描字符串" class="headerlink" title="3.4 扫描字符串"></a>3.4 扫描字符串</h3><table>
+<thead>
+<tr>
+<th>指令</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>scasb</td>
+<td>比较内存中一个字节和AL寄存器的值</td>
+</tr>
+<tr>
+<td>scasw</td>
+<td>比较内存中一个字和AX寄存器的值</td>
+</tr>
+<tr>
+<td>scasl</td>
+<td>比较内存中的一个双字和EAX寄存器的值</td>
+</tr>
+</tbody></table>
+<p>SCAS指令使用EDI寄存器作为隐含的目标操作数。</p>
+<hr>
+<h2 id="4-内联汇编约束说明"><a href="#4-内联汇编约束说明" class="headerlink" title="4. 内联汇编约束说明"></a>4. 内联汇编约束说明</h2><p>只针对GCC编译器</p>
+<table>
+<thead>
+<tr>
+<th align="center">约束</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">a</td>
+<td>使用EAX，AX或Al寄存器</td>
+</tr>
+<tr>
+<td align="center">b</td>
+<td>使用EBX，BX或BL寄存器</td>
+</tr>
+<tr>
+<td align="center">c</td>
+<td>使用ECX，CX或CL寄存器</td>
+</tr>
+<tr>
+<td align="center">d</td>
+<td>使用EDX，DX或DL寄存器</td>
+</tr>
+<tr>
+<td align="center">S</td>
+<td>使用ESI或SI寄存器</td>
+</tr>
+<tr>
+<td align="center">D</td>
+<td>使用EDI或DI寄存器</td>
+</tr>
+<tr>
+<td align="center">r</td>
+<td>使用任何可用寄存器</td>
+</tr>
+<tr>
+<td align="center">q</td>
+<td>使用EAX，EBX，ECX或EDX寄存器之一</td>
+</tr>
+<tr>
+<td align="center">A</td>
+<td>对于64位值使用EAX和EDX寄存器</td>
+</tr>
+<tr>
+<td align="center">f</td>
+<td>使用浮点寄存器</td>
+</tr>
+<tr>
+<td align="center">t</td>
+<td>使用第一个（顶部）浮点寄存器</td>
+</tr>
+<tr>
+<td align="center">u</td>
+<td>使用第二个浮点寄存器</td>
+</tr>
+<tr>
+<td align="center">m</td>
+<td>使用变量的内存位置</td>
+</tr>
+<tr>
+<td align="center">o</td>
+<td>使用偏移内存位置</td>
+</tr>
+<tr>
+<td align="center">V</td>
+<td>只使用直接内存位置</td>
+</tr>
+<tr>
+<td align="center">i</td>
+<td>使用立即整数值</td>
+</tr>
+<tr>
+<td align="center">n</td>
+<td>使用值已知的立即整数值</td>
+</tr>
+<tr>
+<td align="center">g</td>
+<td>使用任何可用的寄存器或者内存位置</td>
+</tr>
+</tbody></table>
+<p>输出约束修饰符：</p>
+<table>
+<thead>
+<tr>
+<th>输出修饰符</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>+</td>
+<td>可以读取和写入操作数</td>
+</tr>
+<tr>
+<td>=</td>
+<td>只能写入操作数</td>
+</tr>
+<tr>
+<td>%</td>
+<td>如果必要，操作数可以和下一个操作数切换</td>
+</tr>
+<tr>
+<td>&amp;</td>
+<td>在内联函数完成之前，可以删除或者重新使用操作数</td>
+</tr>
+</tbody></table>
+<h2 id="5-附"><a href="#5-附" class="headerlink" title="5. 附"></a>5. 附</h2><h3 id="5-1-文件模式"><a href="#5-1-文件模式" class="headerlink" title="5.1 文件模式"></a>5.1 文件模式</h3><table>
+<thead>
+<tr>
+<th align="center">模式</th>
+<th align="center">值</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">O_RDONLY</td>
+<td align="center">0</td>
+<td align="center">只读</td>
+</tr>
+<tr>
+<td align="center">O_WRONLY</td>
+<td align="center">1</td>
+<td align="center">只写</td>
+</tr>
+<tr>
+<td align="center">O_RDWR</td>
+<td align="center">2</td>
+<td align="center">可读写</td>
+</tr>
+<tr>
+<td align="center">S_IRWXU</td>
+<td align="center">00700q</td>
+<td align="center">用户有读、写、执行权限</td>
+</tr>
+<tr>
+<td align="center">S_IRUSR</td>
+<td align="center">00400q</td>
+<td align="center">用户有读权限</td>
+</tr>
+<tr>
+<td align="center">S_IWUSR</td>
+<td align="center">00200q</td>
+<td align="center">用户有写权限</td>
+</tr>
+<tr>
+<td align="center">S_IXUSR</td>
+<td align="center">00100q</td>
+<td align="center">用户有执行权限</td>
+</tr>
+<tr>
+<td align="center">S_IRWXG</td>
+<td align="center">00070q</td>
+<td align="center">组有读写执行权限</td>
+</tr>
+<tr>
+<td align="center">S_IRGRP</td>
+<td align="center">00040q</td>
+<td align="center">组有读权限</td>
+</tr>
+<tr>
+<td align="center">S_IWGRP</td>
+<td align="center">00020q</td>
+<td align="center">组有写权限</td>
+</tr>
+<tr>
+<td align="center">S_IXGRP</td>
+<td align="center">00010q</td>
+<td align="center">组有执行权限</td>
+</tr>
+<tr>
+<td align="center">S_IRWXO</td>
+<td align="center">00007q</td>
+<td align="center">其他用户有读写执行权限</td>
+</tr>
+<tr>
+<td align="center">S_IROTH</td>
+<td align="center">00004q</td>
+<td align="center">其他用户有读权限</td>
+</tr>
+<tr>
+<td align="center">S_IWOTH</td>
+<td align="center">00002q</td>
+<td align="center">其他用户有写权限</td>
+</tr>
+<tr>
+<td align="center">S_IXOTH</td>
+<td align="center">00001q</td>
+<td align="center">其他用户有执行权限</td>
+</tr>
+</tbody></table>
+<h3 id="5-2-宏"><a href="#5-2-宏" class="headerlink" title="5.2 宏"></a>5.2 宏</h3><p>单行：</p>
+<pre class="line-numbers language-asm" data-language="asm"><code class="language-asm">%define mulby4(x) shl x, 2<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<pre class="line-numbers language-asm" data-language="asm"><code class="language-asm">mulby4 (rax)<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>多行：</p>
+<pre class="line-numbers language-asm" data-language="asm"><code class="language-asm">%macro abs 1
+	cmp %1, 0
+	jge %%done
+	neg %1
+%%done:
+%endmacro
+
+abs eax<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="6-参考"><a href="#6-参考" class="headerlink" title="6. 参考"></a>6. 参考</h2><p>《汇编语言程序设计》<a target="_blank" rel="noopener" href="https://gitee.com/nongguangxin/professional-assembly-language">代码</a></p>
+<p><a target="_blank" rel="noopener" href="https://elixir.bootlin.com/linux/v5.4.71/source/include/uapi/asm-generic/errno-base.h#L5">错误代码</a>：/include/uapi/asm-generic/errno-base.h</p>
+<p><a target="_blank" rel="noopener" href="http://www.lxhp.in-berlin.de/lhpsysc0.html">System call</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cs.yale.edu/flint/cs421/papers/x86-asm/asm.html">x86 Assembly Guide</a></p>
+<p><a target="_blank" rel="noopener" href="https://software.intel.com/content/www/us/en/develop/articles/introduction-to-x64-assembly.html">Introduction to x64 Assembly</a></p>
+<p> <a target="_blank" rel="noopener" href="https://software.intel.com/sites/default/files/managed/39/c5/325462-sdm-vol-1-2abcd-3abcd.pdf">Intel® 64 and IA-32 Architectures Software Developer’s Manual</a></p>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://nonguangxin.cn" rel="external nofollow noreferrer">农光鑫</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://nonguangxin.cn/X86%E5%B8%B8%E7%94%A8%E6%B1%87%E7%BC%96%E6%8C%87%E4%BB%A4-AT-T%E6%A0%BC%E5%BC%8F.html">https://nonguangxin.cn/X86%E5%B8%B8%E7%94%A8%E6%B1%87%E7%BC%96%E6%8C%87%E4%BB%A4-AT-T%E6%A0%BC%E5%BC%8F.html</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY-NC-SA 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="https://nonguangxin.cn" target="_blank">农光鑫</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/AT-T/">
+                                    <span class="chip bg-color">AT&amp;T</span>
+                                </a>
+                            
+                                <a href="/tags/x86/">
+                                    <span class="chip bg-color">x86</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/NongGuangXin/NongGuangXin.github.io/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="https://cdn.jsdelivr.net/gh/NongGuangXin/NongGuangXin.github.io/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/C%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E8%AE%A1%E6%97%B6%E6%96%B9%E5%BC%8F.html">
+                    <div class="card-image">
+                        
+                        
+                        <img src="https://cdn.jsdelivr.net/gh/NongGuangXin/NongGuangXin.github.io/medias/featureimages/8.jpg" class="responsive-img" alt="C语言中的计时方式">
+                        
+                        <span class="card-title">C语言中的计时方式</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            在C中计算时间间隔的不同方法和示例
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2020-12-15
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/C-C/" class="post-category">
+                                    C/C++
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E6%97%B6%E9%97%B4%E9%97%B4%E9%9A%94/">
+                        <span class="chip bg-color">时间间隔</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/C-%E5%86%85%E8%81%94%E6%B1%87%E7%BC%96.html">
+                    <div class="card-image">
+                        
+                        
+                        <img src="https://cdn.jsdelivr.net/gh/NongGuangXin/NongGuangXin.github.io/medias/featureimages/17.jpg" class="responsive-img" alt="C++内联汇编">
+                        
+                        <span class="card-title">C++内联汇编</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            在C++中使用内联汇编的简要介绍和几个示例
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-11-26
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/C-C/" class="post-category">
+                                    C/C++
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E5%86%85%E8%81%94%E6%B1%87%E7%BC%96/">
+                        <span class="chip bg-color">内联汇编</span>
+                    </a>
+                    
+                    <a href="/tags/AT-T/">
+                        <span class="chip bg-color">AT&amp;T</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/NongGuangXin/NongGuangXin.github.io/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/NongGuangXin/NongGuangXin.github.io/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/NongGuangXin/NongGuangXin.github.io/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/NongGuangXin/NongGuangXin.github.io/libs/codeBlock/codeShrink.js"></script>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/gh/NongGuangXin/NongGuangXin.github.io/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h1, h2, h3, h4, h5, h6'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h1, h2, h3, h4, h5, h6').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+    <div class="container row center-align" style="margin-bottom: 15px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2020-2022</span>
+            
+            <span id="year">2020</span>
+            <a href="/about" target="_blank">农光鑫</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                class="white-color">102.4k</span>&nbsp;字
+            
+            
+            
+            
+            
+            
+            <span id="busuanzi_container_site_pv">
+                |&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
+                    class="white-color"></span>&nbsp;次
+            </span>
+            
+            
+            <span id="busuanzi_container_site_uv">
+                |&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv"
+                    class="white-color"></span>&nbsp;人
+            </span>
+            
+            <br>
+            
+            <span id="sitetime">载入运行时间...</span>
+            <script>
+                function siteTime() {
+                    var seconds = 1000;
+                    var minutes = seconds * 60;
+                    var hours = minutes * 60;
+                    var days = hours * 24;
+                    var years = days * 365;
+                    var today = new Date();
+                    var startYear = "2020";
+                    var startMonth = "7";
+                    var startDate = "9";
+                    var startHour = "0";
+                    var startMinute = "0";
+                    var startSecond = "0";
+                    var todayYear = today.getFullYear();
+                    var todayMonth = today.getMonth() + 1;
+                    var todayDate = today.getDate();
+                    var todayHour = today.getHours();
+                    var todayMinute = today.getMinutes();
+                    var todaySecond = today.getSeconds();
+                    var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                    var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                    var diff = t2 - t1;
+                    var diffYears = Math.floor(diff / years);
+                    var diffDays = Math.floor((diff / days) - diffYears * 365);
+                    var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+                    var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) /
+                        minutes);
+                    var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours -
+                        diffMinutes * minutes) / seconds);
+                    if (startYear == todayYear) {
+                        document.getElementById("year").innerHTML = todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffDays + " 天 " + diffHours +
+                            " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    } else {
+                        document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffYears + " 年 " + diffDays +
+                            " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    }
+                }
+                setInterval(siteTime, 1000);
+            </script>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://gitee.com/nongguangxin" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:614837785@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=614837785" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 614837785" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="https://cdn.jsdelivr.net/gh/NongGuangXin/NongGuangXin.github.io/libs/materialize/materialize.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/NongGuangXin/NongGuangXin.github.io/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/NongGuangXin/NongGuangXin.github.io/libs/aos/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/NongGuangXin/NongGuangXin.github.io/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/NongGuangXin/NongGuangXin.github.io/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/NongGuangXin/NongGuangXin.github.io/js/matery.js"></script>
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    
+    <script async src="https://cdn.jsdelivr.net/gh/NongGuangXin/NongGuangXin.github.io/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+	
+    
+
+    
+
+    
+
+    
+    <script src="https://cdn.jsdelivr.net/gh/NongGuangXin/NongGuangXin.github.io/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>
