@@ -419,14 +419,14 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2022-03-12
+                    2022-03-16
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    775
+                    792
                 </div>
                 
 
@@ -544,8 +544,9 @@ set -g default-terminal &quot;screen-256color&quot;<span aria-hidden="true" clas
 <li>转换<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ pandoc apreface-chinese.md --pdf-engine<span class="token operator">=</span>xelatex -o out.pdf -V <span class="token assign-left variable">CJKmainfont</span><span class="token operator">=</span><span class="token string">"SimHei"</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
 </ol>
 <h2 id="dpkg"><a href="#dpkg" class="headerlink" title="dpkg"></a>dpkg</h2><p> 删除已卸载软件的配置文件：sudo dpkg -l | grep “^rc” | awk ‘{print $2}’ | xargs sudo apt -y purge</p>
-<h2 id="Asan-代码分析-gcc错误高亮"><a href="#Asan-代码分析-gcc错误高亮" class="headerlink" title="Asan 代码分析, gcc错误高亮"></a>Asan 代码分析, gcc错误高亮</h2><p>使用ASan时，只需gcc选项加上-fsanitize=address选项</p>
+<h2 id="Asan-代码分析-gcc错误高亮-预定于宏"><a href="#Asan-代码分析-gcc错误高亮-预定于宏" class="headerlink" title="Asan 代码分析, gcc错误高亮, 预定于宏"></a>Asan 代码分析, gcc错误高亮, 预定于宏</h2><p>使用ASan时，只需gcc选项加上-fsanitize=address选项</p>
 <p>gcc错误高亮：-fdiagnostics-color</p>
+<p>输出预定义宏：gcc -dM -E - &lt; /dev/null  </p>
 <h2 id="PySide6-in-WSLg"><a href="#PySide6-in-WSLg" class="headerlink" title="PySide6 in WSLg"></a>PySide6 in WSLg</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">sudo</span> <span class="token function">apt</span> <span class="token function">install</span> libopengl0 libegl1 libxkbcommon0 libwayland-dev<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
                 
             </div>
@@ -904,7 +905,7 @@ set -g default-terminal &quot;screen-256color&quot;<span aria-hidden="true" clas
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">102.4k</span>&nbsp;字
+                class="white-color">102.5k</span>&nbsp;字
             
             
             
