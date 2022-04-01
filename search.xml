@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>mysql-install</title>
+      <link href="/mysql-install.html"/>
+      <url>/mysql-install.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="MYSQL"><a href="#MYSQL" class="headerlink" title="MYSQL"></a>MYSQL</h1><h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>Ubuntu2004中直接apt安装：</p><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">sudo</span> <span class="token function">apt</span> <span class="token function">install</span> mysql-server<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><h2 id="修改密码"><a href="#修改密码" class="headerlink" title="修改密码"></a>修改密码</h2><h3 id="方法1"><a href="#方法1" class="headerlink" title="方法1"></a>方法1</h3><p>直接用sudo免密登录进去</p><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">sudo</span> mysql -u rootWelcome to the MySQL monitor.  Commands end with <span class="token punctuation">;</span> or <span class="token punctuation">\</span>g.Your MySQL connection <span class="token function">id</span> is <span class="token number">10</span>Server version: <span class="token number">8.0</span>.28-0ubuntu0.20.04.3 <span class="token punctuation">(</span>Ubuntu<span class="token punctuation">)</span>Copyright <span class="token punctuation">(</span>c<span class="token punctuation">)</span> <span class="token number">2000</span>, <span class="token number">2022</span>, Oracle and/or its affiliates.Oracle is a registered trademark of Oracle Corporation and/or itsaffiliates. Other names may be trademarks of their respectiveowners.Type <span class="token string">'help;'</span> or <span class="token string">'\h'</span> <span class="token keyword">for</span> help. Type <span class="token string">'\c'</span> to <span class="token function">clear</span> the current input statement.mysql<span class="token operator">></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h3 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h3><p>查看默认用户和密码</p><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">sudo</span> <span class="token function">cat</span> /etc/mysql/debian.cnf<span class="token punctuation">[</span>sudo<span class="token punctuation">]</span> password <span class="token keyword">for</span> dev:<span class="token comment"># Automatically generated for Debian scripts. DO NOT TOUCH!</span><span class="token punctuation">[</span>client<span class="token punctuation">]</span><span class="token function">host</span>     <span class="token operator">=</span> localhostuser     <span class="token operator">=</span> debian-sys-maintpassword <span class="token operator">=</span> zD010sDV3QSutKdZsocket   <span class="token operator">=</span> /var/run/mysqld/mysqld.sock<span class="token punctuation">[</span>mysql_upgrade<span class="token punctuation">]</span><span class="token function">host</span>     <span class="token operator">=</span> localhostuser     <span class="token operator">=</span> debian-sys-maintpassword <span class="token operator">=</span> zD010sDV3QSutKdZsocket   <span class="token operator">=</span> /var/run/mysqld/mysqld.sock<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>使用默认用户和密码登录进去</p><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ mysql -u debian-sys-maint -pEnter password:Welcome to the MySQL monitor.  Commands end with <span class="token punctuation">;</span> or <span class="token punctuation">\</span>g.Your MySQL connection <span class="token function">id</span> is <span class="token number">10</span>Server version: <span class="token number">8.0</span>.28-0ubuntu0.20.04.3 <span class="token punctuation">(</span>Ubuntu<span class="token punctuation">)</span>Copyright <span class="token punctuation">(</span>c<span class="token punctuation">)</span> <span class="token number">2000</span>, <span class="token number">2022</span>, Oracle and/or its affiliates.Oracle is a registered trademark of Oracle Corporation and/or itsaffiliates. Other names may be trademarks of their respectiveowners.Type <span class="token string">'help;'</span> or <span class="token string">'\h'</span> <span class="token keyword">for</span> help. Type <span class="token string">'\c'</span> to <span class="token function">clear</span> the current input statement.mysql<span class="token operator">></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h3 id="修改密码-1"><a href="#修改密码-1" class="headerlink" title="修改密码"></a>修改密码</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ mysql<span class="token operator">></span> use mysqlReading table information <span class="token keyword">for</span> completion of table and <span class="token function">column</span> namesYou can turn off this feature to get a quicker startup with -ADatabase changedmysql<span class="token operator">></span> alter user <span class="token string">'root'</span>@<span class="token string">'localhost'</span> identified with mysql_native_password by <span class="token string">'root'</span><span class="token punctuation">;</span>Query OK, <span class="token number">0</span> rows affected <span class="token punctuation">(</span><span class="token number">0.01</span> sec<span class="token punctuation">)</span>mysql<span class="token operator">></span> <span class="token builtin class-name">exit</span>Bye<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>然后就可以使用root更新的密码登录了。</p><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ mysql -u root -pEnter password:Welcome to the MySQL monitor.  Commands end with <span class="token punctuation">;</span> or <span class="token punctuation">\</span>g.Your MySQL connection <span class="token function">id</span> is <span class="token number">25</span>Server version: <span class="token number">8.0</span>.28-0ubuntu0.20.04.3 <span class="token punctuation">(</span>Ubuntu<span class="token punctuation">)</span>Copyright <span class="token punctuation">(</span>c<span class="token punctuation">)</span> <span class="token number">2000</span>, <span class="token number">2022</span>, Oracle and/or its affiliates.Oracle is a registered trademark of Oracle Corporation and/or itsaffiliates. Other names may be trademarks of their respectiveowners.Type <span class="token string">'help;'</span> or <span class="token string">'\h'</span> <span class="token keyword">for</span> help. Type <span class="token string">'\c'</span> to <span class="token function">clear</span> the current input statement.mysql<span class="token operator">></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h2 id="允许远程登录"><a href="#允许远程登录" class="headerlink" title="允许远程登录"></a>允许远程登录</h2><pre class="line-numbers language-none"><code class="language-none">use mysql;GRANT ALL ON *.* TO &#39;root&#39;@&#39;%&#39;;flush privileges;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>注意：1.放开服务器端口限制； 2. <code>/etc/mysql/mysql.conf.d/mysqld.cnf</code>中 <code>bind-address = 127.0.0.1</code>需要注释掉然后重启服务</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 数据库 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> MySQL </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>C++ stack API</title>
       <link href="/C-stack-API.html"/>
       <url>/C-stack-API.html</url>
@@ -1453,9 +1478,9 @@
     
     
     <entry>
-      <title>about</title>
-      <link href="/about/index.html"/>
-      <url>/about/index.html</url>
+      <title>404</title>
+      <link href="/404/index.html"/>
+      <url>/404/index.html</url>
       
         <content type="html"><![CDATA[]]></content>
       
@@ -1464,9 +1489,9 @@
     
     
     <entry>
-      <title>404</title>
-      <link href="/404/index.html"/>
-      <url>/404/index.html</url>
+      <title>about</title>
+      <link href="/about/index.html"/>
+      <url>/about/index.html</url>
       
         <content type="html"><![CDATA[]]></content>
       
