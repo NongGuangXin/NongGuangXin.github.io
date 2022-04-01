@@ -119,7 +119,7 @@
       
       <categories>
           
-          <category> cpp </category>
+          <category> C/C++ </category>
           
       </categories>
       
@@ -173,7 +173,7 @@
       
       <categories>
           
-          <category> C </category>
+          <category> C/C++ </category>
           
       </categories>
       
@@ -206,7 +206,7 @@
       
       <categories>
           
-          <category> C </category>
+          <category> C/C++ </category>
           
       </categories>
       
@@ -233,7 +233,7 @@
       
       <categories>
           
-          <category> C </category>
+          <category> C/C++ </category>
           
       </categories>
       
@@ -258,7 +258,7 @@
       
       <categories>
           
-          <category> C </category>
+          <category> C/C++ </category>
           
       </categories>
       
@@ -285,7 +285,7 @@
       
       <categories>
           
-          <category> C </category>
+          <category> C/C++ </category>
           
       </categories>
       
@@ -310,7 +310,7 @@
       
       <categories>
           
-          <category> C </category>
+          <category> C/C++ </category>
           
       </categories>
       
@@ -335,7 +335,7 @@
       
       <categories>
           
-          <category> C </category>
+          <category> C/C++ </category>
           
       </categories>
       
@@ -389,7 +389,7 @@
       
       <categories>
           
-          <category> C </category>
+          <category> C/C++ </category>
           
       </categories>
       
@@ -439,6 +439,12 @@
         <content type="html"><![CDATA[<h2 id="示例1"><a href="#示例1" class="headerlink" title="示例1"></a>示例1</h2><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;iostream></span></span><span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span><span class="token keyword">class</span> <span class="token class-name">test</span><span class="token punctuation">&#123;</span><span class="token keyword">private</span><span class="token operator">:</span>    <span class="token keyword">int</span> _id<span class="token punctuation">;</span><span class="token keyword">public</span><span class="token operator">:</span>    <span class="token function">test</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token function">test</span><span class="token punctuation">(</span><span class="token keyword">int</span> id<span class="token punctuation">)</span> <span class="token operator">:</span> <span class="token function">_id</span><span class="token punctuation">(</span>id<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>        cout <span class="token operator">&lt;&lt;</span> <span class="token string">"ctor. this="</span> <span class="token operator">&lt;&lt;</span> <span class="token keyword">this</span> <span class="token operator">&lt;&lt;</span> <span class="token string">" id="</span> <span class="token operator">&lt;&lt;</span> _id <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>    <span class="token punctuation">&#125;</span>    <span class="token operator">~</span><span class="token function">test</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>test<span class="token double-colon punctuation">::</span><span class="token function">test</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> cout <span class="token operator">&lt;&lt;</span> <span class="token string">"ctor. this="</span> <span class="token operator">&lt;&lt;</span> <span class="token keyword">this</span> <span class="token operator">&lt;&lt;</span> <span class="token string">" id="</span> <span class="token operator">&lt;&lt;</span> _id <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span> <span class="token punctuation">&#125;</span><span class="token class-name">test</span><span class="token double-colon punctuation">::</span><span class="token operator">~</span><span class="token function">test</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> cout <span class="token operator">&lt;&lt;</span> <span class="token string">"dtor. this="</span> <span class="token operator">&lt;&lt;</span> <span class="token keyword">this</span> <span class="token operator">&lt;&lt;</span> <span class="token string">" id="</span> <span class="token operator">&lt;&lt;</span> _id <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span> <span class="token punctuation">&#125;</span><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token keyword">int</span> argc<span class="token punctuation">,</span> <span class="token keyword">char</span><span class="token operator">*</span> argv<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>    <span class="token keyword">constexpr</span> <span class="token keyword">int</span> size <span class="token operator">=</span> <span class="token number">3</span><span class="token punctuation">;</span>    test<span class="token operator">*</span>         buf  <span class="token operator">=</span> <span class="token keyword">new</span> test<span class="token punctuation">[</span>size<span class="token punctuation">]</span><span class="token punctuation">;</span>    test<span class="token operator">*</span> tmp <span class="token operator">=</span> buf<span class="token punctuation">;</span>    cout <span class="token operator">&lt;&lt;</span> <span class="token string">"buf="</span> <span class="token operator">&lt;&lt;</span> buf <span class="token operator">&lt;&lt;</span> <span class="token string">" tmp="</span> <span class="token operator">&lt;&lt;</span> tmp <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>    <span class="token keyword">for</span> <span class="token punctuation">(</span>size_t i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> size<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>        <span class="token keyword">new</span> <span class="token punctuation">(</span>tmp<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token function">test</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token punctuation">&#125;</span>    cout <span class="token operator">&lt;&lt;</span> <span class="token string">"buf="</span> <span class="token operator">&lt;&lt;</span> buf <span class="token operator">&lt;&lt;</span> <span class="token string">" tmp="</span> <span class="token operator">&lt;&lt;</span> tmp <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>    <span class="token keyword">delete</span><span class="token punctuation">[</span><span class="token punctuation">]</span> buf<span class="token punctuation">;</span>    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span><span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>输出</p><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">ctor. this&#x3D;0x5642615d9eb8 id&#x3D;0ctor. this&#x3D;0x5642615d9ebc id&#x3D;0ctor. this&#x3D;0x5642615d9ec0 id&#x3D;0buf&#x3D;0x5642615d9eb8 tmp&#x3D;0x5642615d9eb8ctor. this&#x3D;0x5642615d9eb8 id&#x3D;0ctor. this&#x3D;0x5642615d9ebc id&#x3D;1ctor. this&#x3D;0x5642615d9ec0 id&#x3D;2buf&#x3D;0x5642615d9eb8 tmp&#x3D;0x5642615d9ec4dtor. this&#x3D;0x5642615d9ec0 id&#x3D;2dtor. this&#x3D;0x5642615d9ebc id&#x3D;1dtor. this&#x3D;0x5642615d9eb8 id&#x3D;0<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h2 id="示例2"><a href="#示例2" class="headerlink" title="示例2"></a>示例2</h2><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;iostream></span></span><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;cstdlib></span></span><span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span><span class="token keyword">class</span> <span class="token class-name">test</span><span class="token punctuation">&#123;</span><span class="token keyword">private</span><span class="token operator">:</span>    <span class="token keyword">int</span> _id<span class="token punctuation">;</span><span class="token keyword">public</span><span class="token operator">:</span>    <span class="token function">test</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token function">test</span><span class="token punctuation">(</span><span class="token keyword">int</span> id<span class="token punctuation">)</span> <span class="token operator">:</span> <span class="token function">_id</span><span class="token punctuation">(</span>id<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>        cout <span class="token operator">&lt;&lt;</span> <span class="token string">"ctor. this="</span> <span class="token operator">&lt;&lt;</span> <span class="token keyword">this</span> <span class="token operator">&lt;&lt;</span> <span class="token string">" id="</span> <span class="token operator">&lt;&lt;</span> _id <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>    <span class="token punctuation">&#125;</span>    <span class="token operator">~</span><span class="token function">test</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>test<span class="token double-colon punctuation">::</span><span class="token function">test</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> cout <span class="token operator">&lt;&lt;</span> <span class="token string">"ctor. this="</span> <span class="token operator">&lt;&lt;</span> <span class="token keyword">this</span> <span class="token operator">&lt;&lt;</span> <span class="token string">" id="</span> <span class="token operator">&lt;&lt;</span> _id <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span> <span class="token punctuation">&#125;</span><span class="token class-name">test</span><span class="token double-colon punctuation">::</span><span class="token operator">~</span><span class="token function">test</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> cout <span class="token operator">&lt;&lt;</span> <span class="token string">"dtor. this="</span> <span class="token operator">&lt;&lt;</span> <span class="token keyword">this</span> <span class="token operator">&lt;&lt;</span> <span class="token string">" id="</span> <span class="token operator">&lt;&lt;</span> _id <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span> <span class="token punctuation">&#125;</span><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token keyword">int</span> argc<span class="token punctuation">,</span> <span class="token keyword">char</span><span class="token operator">*</span> argv<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>    <span class="token keyword">constexpr</span> <span class="token keyword">int</span> size <span class="token operator">=</span> <span class="token number">3</span><span class="token punctuation">;</span>    <span class="token keyword">unsigned</span> <span class="token keyword">char</span> buf<span class="token punctuation">[</span><span class="token keyword">sizeof</span><span class="token punctuation">(</span>test<span class="token punctuation">)</span><span class="token operator">*</span>size<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token number">0</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>    test<span class="token operator">*</span> tmp <span class="token operator">=</span> <span class="token punctuation">(</span>test<span class="token operator">*</span><span class="token punctuation">)</span>buf<span class="token punctuation">;</span>    cout <span class="token operator">&lt;&lt;</span> <span class="token string">"buf="</span> <span class="token operator">&lt;&lt;</span> buf <span class="token operator">&lt;&lt;</span> <span class="token string">" tmp="</span> <span class="token operator">&lt;&lt;</span> tmp <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>    <span class="token keyword">for</span> <span class="token punctuation">(</span>size_t i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> size<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>        <span class="token keyword">new</span> <span class="token punctuation">(</span>tmp<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token function">test</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token punctuation">&#125;</span>    cout <span class="token operator">&lt;&lt;</span> <span class="token string">"buf="</span> <span class="token operator">&lt;&lt;</span> buf <span class="token operator">&lt;&lt;</span> <span class="token string">" tmp="</span> <span class="token operator">&lt;&lt;</span> tmp <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span><span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>输出</p><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">buf<span class="token operator">=</span> tmp<span class="token operator">=</span><span class="token number">0x7ffe2e9f91dc</span>ctor<span class="token punctuation">.</span> <span class="token keyword">this</span><span class="token operator">=</span><span class="token number">0x7ffe2e9f91dc</span> id<span class="token operator">=</span><span class="token number">0</span>ctor<span class="token punctuation">.</span> <span class="token keyword">this</span><span class="token operator">=</span><span class="token number">0x7ffe2e9f91e0</span> id<span class="token operator">=</span><span class="token number">1</span>ctor<span class="token punctuation">.</span> <span class="token keyword">this</span><span class="token operator">=</span><span class="token number">0x7ffe2e9f91e4</span> id<span class="token operator">=</span><span class="token number">2</span>buf<span class="token operator">=</span> tmp<span class="token operator">=</span><span class="token number">0x7ffe2e9f91e8</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>]]></content>
       
       
+      <categories>
+          
+          <category> C/C++ </category>
+          
+      </categories>
+      
       
         <tags>
             
@@ -460,7 +466,7 @@
       
       <categories>
           
-          <category> C++ </category>
+          <category> C/C++ </category>
           
       </categories>
       
@@ -1241,7 +1247,7 @@
       
       <categories>
           
-          <category> AT&amp;T汇编 </category>
+          <category> C/C++ </category>
           
       </categories>
       
@@ -1295,7 +1301,7 @@
       
       <categories>
           
-          <category> AT&amp;T汇编 </category>
+          <category> C/C++ </category>
           
       </categories>
       
@@ -1322,7 +1328,7 @@
       
       <categories>
           
-          <category> AT&amp;T汇编 </category>
+          <category> C/C++ </category>
           
       </categories>
       
